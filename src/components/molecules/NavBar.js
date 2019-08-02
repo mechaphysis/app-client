@@ -1,5 +1,5 @@
 import React from "react";
-import NavLink from "react-router-dom/Link";
+import { Link } from "react-router-dom";
 
 //Material UI
 import AppBar from "@material-ui/core/AppBar";
@@ -10,13 +10,13 @@ function NavBar() {
   return (
     <AppBar>
       <ToolBar className="nav-container">
-        <Button color="inherit" component={NavLink} to="/login">
+        <Button color="inherit" component={Link} to="/login">
           Login
         </Button>
-        <Button color="inherit" component={NavLink} to="/">
+        <Button color="inherit" component={Link} to="/">
           Home
         </Button>
-        <Button color="inherit" component={NavLink} to="/signup">
+        <Button color="inherit" component={Link} to="/signup">
           Signup
         </Button>
       </ToolBar>

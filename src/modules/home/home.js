@@ -15,7 +15,7 @@ class Home extends Component {
   render() {
     let recentPosts =
       this.state.posts !== null ? (
-        this.state.posts.map(post => <Post post={post} />)
+        this.state.posts.map(post => <Post key={post.postId} post={post} />)
       ) : (
         <p>Loading...</p>
       );

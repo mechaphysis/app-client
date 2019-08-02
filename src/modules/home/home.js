@@ -10,7 +10,6 @@ class Home extends Component {
   componentDidMount() {
     fetchPosts().then(postsData => {
       this.setState({ posts: postsData });
-      console.log("---> print postsData: ", postsData);
     });
   }
   render() {

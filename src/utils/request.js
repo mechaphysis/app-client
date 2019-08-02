@@ -8,22 +8,35 @@ import axios from "axios";
  * the baseUrl for axios and else.
  */
 
-const get = async resource => {
-  try {
-    let response = await axios.get(`${resource}`);
-    return response.data;
-  } catch (error) {
-    console.log("Get Request Failed: ", error);
-  }
+const get = resource => {
+  return axios
+    .get(resource)
+    .then(response => response.data)
+    .catch(error => {
+      console.log(
+        "Get Request Failed: ",
+        error.response.status,
+        "response: ",
+        error.response.data
+      );
+      throw error;
+    });
 };
 
-const post = async (resource, data) => {
-  try {
-    let response = await axios.post(`${resource}`, data);
-    return response.data;
-  } catch (error) {
-    console.log("Post Request Failed: ", error);
-  }
+const post = (resource, payload) => {
+  return axios
+    .post(resource, payload)
+    .then(response => response.data)
+    .catch(error => {
+      console.log(
+        "Post Request Failed: ",
+        error.response.status,
+        "response: ",
+        error.response.data
+      );
+
+      throw error;
+    });
 };
 
 const REQUEST = {

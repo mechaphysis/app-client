@@ -27,7 +27,8 @@ const styles = {
   },
   customError: {
     color: "red",
-    fontSize: "0.8rem"
+    fontSize: "0.8rem",
+    marginTop: 10
   }
 };
 

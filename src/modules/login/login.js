@@ -24,6 +24,10 @@ const styles = {
   },
   button: {
     margin: "20px 0"
+  },
+  customError: {
+    color: "red",
+    fontSize: "0.8rem"
   }
 };
 
@@ -36,7 +40,11 @@ const Login = props => {
     password: ""
   });
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+    general: ""
+  });
   const redirectToHome = () => props.history.push("/");
 
   const handleSubmit = event => {
@@ -76,7 +84,15 @@ const Login = props => {
       />
     );
   };
+
   let { classes } = props; //For the JSS styling
+  const renderGeneralErrors = errors => {
+    return errors.general ? (
+      <Typography variant="body2" className={classes.customError}>
+        {errors.general}
+      </Typography>
+    ) : null;
+  };
 
   return (
     <Grid container className={classes.form}>
@@ -87,6 +103,7 @@ const Login = props => {
         </Typography>
         <form onSubmit={handleSubmit}>
           {formFields.map(field => renderTextField(field))}
+          {renderGeneralErrors(errors)}
           <Button
             type="submit"
             variant="contained"

@@ -5,7 +5,7 @@ import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 
 //Pages:
 import home from "./modules/home/home";
-import login from "./modules/login/login";
+import login from "./modules/login/Login";
 import signup from "./modules/signup/signup";
 
 //Molecule NavBar
@@ -26,8 +26,6 @@ function App() {
   return (
     <MuiThemeProvider theme={theme}>
       <div className="App">
-        <h1>Barebones App </h1>
-
         <Router>
           <NavBar />
           <div className="container">

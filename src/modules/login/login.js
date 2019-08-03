@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import withStyles from "@material-ui/core/styles/withStyles";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 //Service:
 import { loginUser } from "../../services/loginService";
 
 //Material UI:
+import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -29,6 +30,9 @@ const styles = {
     color: "red",
     fontSize: "0.8rem",
     marginTop: 10
+  },
+  center: {
+    margin: "auto"
   }
 };
 
@@ -113,6 +117,16 @@ const Login = props => {
           >
             Login
           </Button>
+          <Grid container>
+            <Grid item className={classes.center}>
+              <Typography variant="body2">
+                Not registered yet?{" "}
+                <Link to="/signup" variant="body2">
+                  {"Sign Up"}
+                </Link>
+              </Typography>
+            </Grid>
+          </Grid>
         </form>
       </Grid>
       <Grid item sm />

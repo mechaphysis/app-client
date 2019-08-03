@@ -7,7 +7,10 @@ import { includes } from "ramda";
 //Service:
 import { signUpUser } from "../../services/signUpService";
 //Auth helpers:
-import { setUserAuthDetailsInLS } from "../../utils/userAuth";
+import {
+  setUserAuthDetailsInLS,
+  isUserAuthenticated
+} from "../../utils/userAuth";
 
 //Material UI:
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -41,6 +44,8 @@ const SignUp = props => {
   });
   const redirectToHome = () => props.history.push("/");
 
+  if (isUserAuthenticated()) redirectToHome();
+
   const handleSubmit = event => {
     event.preventDefault();
     setLoading(true);
@@ -54,7 +59,7 @@ const SignUp = props => {
       .catch(error => {
         console.log("-->", error);
         setLoading(false);
-        //setErrors({ ...error.response.data.errors });
+        setErrors({ ...error.response.data.errors });
       });
   };
 

@@ -6,7 +6,10 @@ import PropTypes from "prop-types";
 import { loginUser } from "../../services/loginService";
 
 //Auth helpers:
-import { setUserAuthDetailsInLS } from "../../utils/userAuth";
+import {
+  setUserAuthDetailsInLS,
+  isUserAuthenticated
+} from "../../utils/userAuth";
 
 //Material UI:
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -34,7 +37,10 @@ const Login = props => {
     password: "",
     general: ""
   });
+
   const redirectToHome = () => props.history.push("/");
+
+  if (isUserAuthenticated()) redirectToHome();
 
   const handleSubmit = event => {
     event.preventDefault();

@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 //Styling using JSS:
 const styles = {
@@ -24,7 +25,8 @@ const styles = {
     margin: "10px auto"
   },
   button: {
-    margin: "20px 0"
+    margin: "20px 0",
+    position: "relative"
   },
   customError: {
     color: "red",
@@ -33,6 +35,9 @@ const styles = {
   },
   center: {
     margin: "auto"
+  },
+  progress: {
+    position: "absolute"
   }
 };
 
@@ -61,6 +66,7 @@ const Login = props => {
         redirectToHome();
       })
       .catch(error => {
+        setLoading(false);
         setErrors({ ...error.response.data.errors });
       });
   };
@@ -113,9 +119,13 @@ const Login = props => {
             type="submit"
             variant="contained"
             color="primary"
+            disabled={loading}
             className={classes.button}
           >
             Login
+            {loading && (
+              <CircularProgress size={30} className={classes.progress} />
+            )}
           </Button>
           <Grid container>
             <Grid item className={classes.center}>

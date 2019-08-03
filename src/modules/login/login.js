@@ -5,6 +5,9 @@ import PropTypes from "prop-types";
 //Service:
 import { loginUser } from "../../services/loginService";
 
+//Auth helpers:
+import { setUserAuthDetailsInLS } from "../../utils/userAuth";
+
 //Material UI:
 import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid";
@@ -14,32 +17,8 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 //Styling using JSS:
-const styles = {
-  form: {
-    textAlign: "center"
-  },
-  pageTitle: {
-    margin: "10px auto"
-  },
-  textField: {
-    margin: "10px auto"
-  },
-  button: {
-    margin: "20px 0",
-    position: "relative"
-  },
-  customError: {
-    color: "red",
-    fontSize: "0.8rem",
-    marginTop: 10
-  },
-  center: {
-    margin: "auto"
-  },
-  progress: {
-    position: "absolute"
-  }
-};
+import { formStyles } from "../../styles/general";
+const styles = formStyles;
 
 let formFields = ["email", "password"];
 
@@ -62,6 +41,7 @@ const Login = props => {
     setLoading(true);
     loginUser(form)
       .then(data => {
+        setUserAuthDetailsInLS(data.token);
         setLoading(false);
         redirectToHome();
       })

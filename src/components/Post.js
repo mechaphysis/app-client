@@ -13,19 +13,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
 //Styles in JSS manner:
-const styles = {
-  card: {
-    display: "flex",
-    marginBottom: 20
-  },
-  image: {
-    minWidth: 200,
-    objectFit: "cover"
-  },
-  content: {
-    padding: 25
-  }
-};
+import { postStyles } from "./styles";
+const styles = postStyles;
 
 //Extend dayjs to show date in format 'X days ago'
 dayjs.extend(relativeTime);

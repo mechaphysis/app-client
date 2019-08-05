@@ -5,22 +5,18 @@ import customTheme from "./styles/theme";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 
 //Pages:
-import home from "./modules/home/home";
-import login from "./modules/login/Login";
-import signup from "./modules/signup/SignUp";
-//Auth helpers:
-import { isSessionExpired } from "./utils/userAuth";
+import home from "./components/pages/home/home";
+import login from "./components/pages/login/Login";
+import signup from "./components/pages/signup/SignUp";
+
+//AuthRoute HOC:
+import AuthRoute from "./components/templates/AuthRoute";
 
 //Molecule NavBar
 import NavBar from "./components/molecules/NavBar";
 import { MuiThemeProvider } from "@material-ui/core";
 
 const theme = createMuiTheme(customTheme);
-
-const sessionHasExpired = isSessionExpired();
-if (sessionHasExpired) {
-  window.location.href = "/login";
-}
 
 function App() {
   return (
@@ -31,8 +27,8 @@ function App() {
           <div className="container">
             <Switch>
               <Route exact path="/" component={home} />
-              <Route exact path="/login" component={login} />
-              <Route exact path="/signup" component={signup} />
+              <AuthRoute exact path="/login" component={login} />
+              <AuthRoute exact path="/signup" component={signup} />
             </Switch>
           </div>
         </Router>

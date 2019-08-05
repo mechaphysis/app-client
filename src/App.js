@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import customTheme from "./styles/theme";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+//Redux
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 //Pages:
 import home from "./components/pages/home/home";
@@ -21,7 +24,7 @@ const theme = createMuiTheme(customTheme);
 function App() {
   return (
     <MuiThemeProvider theme={theme}>
-      <div className="App">
+      <Provider store={store}>
         <Router>
           <NavBar />
           <div className="container">
@@ -32,7 +35,7 @@ function App() {
             </Switch>
           </div>
         </Router>
-      </div>
+      </Provider>
     </MuiThemeProvider>
   );
 }

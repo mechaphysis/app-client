@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import { includes } from "ramda";
-
 //Service:
-import { signUpUser } from "../../services/signUpService";
+import { loginUser } from "../../../services/loginService";
+
 //Auth helpers:
 import {
   setUserAuthDetailsInLS,
-  isUserAuthenticated
-} from "../../utils/userAuth";
+  isUserAuthenticated,
+  isSessionExpired
+} from "../../../utils/userAuth";
 
 //Material UI:
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -21,43 +21,38 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 //Styling using JSS:
-import { formStyles } from "../../styles/general";
+import { formStyles } from "../../../styles/general";
 const styles = formStyles;
 
-let formFields = ["handle", "email", "password", "confirmPassword"];
+let formFields = ["email", "password"];
 
-const SignUp = props => {
+const Login = props => {
   //Using hooks for state:
   const [form, setValues] = useState({
-    handle: "",
     email: "",
-    password: "",
-    confirmPassword: ""
+    password: ""
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({
-    handle: "",
     email: "",
     password: "",
-    confirmPassword: "",
     general: ""
   });
+
   const redirectToHome = () => props.history.push("/");
 
-  if (isUserAuthenticated()) redirectToHome();
+  if (isUserAuthenticated() && !isSessionExpired()) redirectToHome();
 
   const handleSubmit = event => {
     event.preventDefault();
     setLoading(true);
-    signUpUser(form)
+    loginUser(form)
       .then(data => {
-        console.log("--> data: ", data);
         setUserAuthDetailsInLS(data.token);
         setLoading(false);
         redirectToHome();
       })
       .catch(error => {
-        console.log("-->", error);
         setLoading(false);
         setErrors({ ...error.response.data.errors });
       });
@@ -76,8 +71,8 @@ const SignUp = props => {
         key={fieldname}
         id={fieldname}
         name={fieldname}
-        type={includes("confirm", fieldname) ? "password" : fieldname}
-        label={includes("confirm", fieldname) ? "confirm password" : fieldname}
+        type={fieldname}
+        label={fieldname}
         className={classes.textField}
         value={form[fieldname]}
         helperText={errors[fieldname]}
@@ -102,7 +97,7 @@ const SignUp = props => {
       <Grid item sm />
       <Grid item sm>
         <Typography variant="h3" className={classes.pageTitle}>
-          Sign Up
+          Login
         </Typography>
         <form onSubmit={handleSubmit}>
           {formFields.map(field => renderTextField(field))}
@@ -114,7 +109,7 @@ const SignUp = props => {
             disabled={loading}
             className={classes.button}
           >
-            Sign Up
+            Login
             {loading && (
               <CircularProgress size={30} className={classes.progress} />
             )}
@@ -122,9 +117,9 @@ const SignUp = props => {
           <Grid container>
             <Grid item className={classes.center}>
               <Typography variant="body2">
-                Already registered?{" "}
-                <Link to="/login" variant="body2">
-                  {"Sign In"}
+                Not registered yet?{" "}
+                <Link to="/signup" variant="body2">
+                  {"Sign Up"}
                 </Link>
               </Typography>
             </Grid>
@@ -136,8 +131,8 @@ const SignUp = props => {
   );
 };
 
-SignUp.propTypes = {
+Login.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(SignUp);
+export default withStyles(styles)(Login);

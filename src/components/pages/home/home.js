@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
-import { fetchPosts } from "../../services/postsService";
-import Post from "../../components/Post";
+import { fetchPosts } from "../../../services/postsService";
+import Post from "../../organisms/post/Post";
 
 class Home extends Component {
   state = {

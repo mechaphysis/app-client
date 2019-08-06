@@ -2,15 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-//Service:
-import { loginUser } from "../../../services/loginService";
-
 //Auth helpers:
-import {
-  setUserAuthDetailsInLS,
-  isUserAuthenticated,
-  isSessionExpired
-} from "../../../utils/userAuth";
+import { isUserAuthenticated, isSessionExpired } from "../../../utils/userAuth";
+
+//Redux
+import { connect } from "react-redux";
+import { loginUser } from "../../../redux/actions/userActions";
 
 //Material UI:
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -27,35 +24,17 @@ const styles = formStyles;
 let formFields = ["email", "password"];
 
 const Login = props => {
-  //Using hooks for state:
+  //Using hooks for minimal state:
   const [form, setValues] = useState({
     email: "",
     password: ""
   });
-  const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState({
-    email: "",
-    password: "",
-    general: ""
-  });
 
-  const redirectToHome = () => props.history.push("/");
-
-  if (isUserAuthenticated() && !isSessionExpired()) redirectToHome();
+  if (isUserAuthenticated() && !isSessionExpired()) props.history.push("/");
 
   const handleSubmit = event => {
     event.preventDefault();
-    setLoading(true);
-    loginUser(form)
-      .then(data => {
-        setUserAuthDetailsInLS(data.token);
-        setLoading(false);
-        redirectToHome();
-      })
-      .catch(error => {
-        setLoading(false);
-        setErrors({ ...error.response.data.errors });
-      });
+    props.loginUser(form, props.history);
   };
 
   const handleChange = event => {
@@ -83,7 +62,11 @@ const Login = props => {
     );
   };
 
-  let { classes } = props; //For the JSS styling
+  let {
+    classes,
+    UI: { loading, errors }
+  } = props; //For the JSS styling
+
   const renderGeneralErrors = errors => {
     return errors.general ? (
       <Typography variant="body2" className={classes.customError}>
@@ -132,7 +115,21 @@ const Login = props => {
 };
 
 Login.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  loginUser: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Login);
+const mapStateToProps = state => ({
+  user: state.user,
+  UI: state.UI
+});
+
+const mapActionsToProps = {
+  loginUser
+};
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(withStyles(styles)(Login));

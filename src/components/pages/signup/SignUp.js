@@ -37,8 +37,7 @@ const SignUp = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log("-> handle submit clicked: ");
-    props.signUpUser(form);
+    props.signUpUser(form, props.history);
   };
 
   const handleChange = event => {

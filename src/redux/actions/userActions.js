@@ -25,7 +25,6 @@ export const signUpUser = (form, history) => dispatch => {
   dispatch({
     type: LOADING_UI
   });
-  console.log("--->user action");
   signUpService(form)
     .then(data => {
       setUserAuthDetailsInLS(data.token);

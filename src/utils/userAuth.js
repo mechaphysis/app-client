@@ -9,9 +9,11 @@ export const setUserAuthDetailsInLS = token =>
 export const getUserAuthDetailsFromLS = () =>
   localStorage.getItem(AUTH_DETAILS_KEY) || EMPTY_STRING_READONLY;
 
+export const removeUserAuthDetailsFromLS = () =>
+  localStorage.removeItem(AUTH_DETAILS_KEY) || EMPTY_STRING_READONLY;
+
 export const isUserAuthenticated = () => {
   const userAuthDetails = getUserAuthDetailsFromLS();
-  console.log("---> print user authdetails: ", userAuthDetails);
   return {
     isAuthenticated: !!userAuthDetails && !!userAuthDetails.length
   };
@@ -31,4 +33,8 @@ export const isSessionExpired = () => {
 
 export const setAuthorizationHeader = token => {
   return (axios.defaults.headers.common["Authorization"] = `Bearer ${token}`);
+};
+
+export const removeAuthorizationHeader = token => {
+  return delete axios.defaults.headers.common["Authorization"];
 };

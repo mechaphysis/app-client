@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-
+import { connect } from "react-redux";
 import { includes } from "ramda";
 
 //Service:
-import { signUpUser } from "../../../services/signUpService";
+import { signUpUser } from "../../../redux/actions/userActions";
+
 //Auth helpers:
-import {
-  setUserAuthDetailsInLS,
-  isUserAuthenticated,
-  isSessionExpired
-} from "../../../utils/userAuth";
+import { isUserAuthenticated, isSessionExpired } from "../../../utils/userAuth";
 
 //Material UI:
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -28,38 +25,20 @@ const styles = formStyles;
 let formFields = ["handle", "email", "password", "confirmPassword"];
 
 const SignUp = props => {
-  //Using hooks for state:
+  //Using hooks for minimal state:
   const [form, setValues] = useState({
     handle: "",
     email: "",
     password: "",
     confirmPassword: ""
   });
-  const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState({
-    handle: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    general: ""
-  });
-  const redirectToHome = () => props.history.push("/");
 
-  if (isUserAuthenticated() && !isSessionExpired()) redirectToHome();
+  if (isUserAuthenticated() && !isSessionExpired()) props.history.push("/");
 
   const handleSubmit = event => {
     event.preventDefault();
-    setLoading(true);
-    signUpUser(form)
-      .then(data => {
-        setUserAuthDetailsInLS(data.token);
-        setLoading(false);
-        redirectToHome();
-      })
-      .catch(error => {
-        setLoading(false);
-        setErrors({ ...error.response.data.errors });
-      });
+    console.log("-> handle submit clicked: ");
+    signUpUser(form);
   };
 
   const handleChange = event => {
@@ -87,7 +66,10 @@ const SignUp = props => {
     );
   };
 
-  let { classes } = props; //For the JSS styling
+  let {
+    classes,
+    UI: { loading, errors }
+  } = props; //For the JSS styling
   const renderGeneralErrors = errors => {
     return errors.general ? (
       <Typography variant="body2" className={classes.customError}>
@@ -136,7 +118,21 @@ const SignUp = props => {
 };
 
 SignUp.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  signUpUser: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(SignUp);
+const mapStateToProps = state => ({
+  user: state.user,
+  UI: state.UI
+});
+
+const mapActionsToProps = {
+  signUpUser
+};
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(withStyles(styles)(SignUp));

@@ -36,10 +36,8 @@ if (isSessionExpired()) {
   store.dispatch(logOutUser());
   window.location.href = "/login";
 } else {
-  console.log("--> else triggered");
   store.dispatch({ type: SET_AUTHENTICATED });
   const token = getUserAuthDetailsFromLS();
-  console.log("token: ", token);
   setAuthorizationHeader(token);
   store.dispatch(getUserData());
 }

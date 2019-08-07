@@ -6,7 +6,6 @@ import Profile from "../../organisms/profile/Profile";
 
 import { connect } from "react-redux";
 
-//FIXME: Set also as authorized route
 class Home extends Component {
   state = {
     posts: null

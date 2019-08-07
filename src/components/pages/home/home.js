@@ -2,16 +2,19 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import { fetchPosts } from "../../../services/postsService";
 import Post from "../../organisms/post/Post";
-
+import Profile from "../../organisms/profile/Profile";
+//FIXME: Set also as authorized route
 class Home extends Component {
   state = {
     posts: null
   };
+
   componentDidMount() {
     fetchPosts().then(postsData => {
       this.setState({ posts: postsData });
     });
   }
+
   render() {
     let recentPosts =
       this.state.posts !== null ? (
@@ -25,7 +28,7 @@ class Home extends Component {
           {recentPosts}
         </Grid>
         <Grid item sm={4} xs={12}>
-          <p>Profile</p>
+          <Profile />
         </Grid>
       </Grid>
     );

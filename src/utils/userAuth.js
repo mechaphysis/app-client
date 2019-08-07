@@ -2,6 +2,7 @@ import jwtDecode from "jwt-decode";
 import { EMPTY_STRING_READONLY } from "../constants/emptyDefaults";
 import { AUTH_DETAILS_KEY } from "../constants/auth";
 import axios from "axios";
+import { test } from "ramda";
 
 export const setUserAuthDetailsInLS = token =>
   localStorage.setItem(AUTH_DETAILS_KEY, `Bearer ${token}`);
@@ -21,9 +22,9 @@ export const isUserAuthenticated = () => {
 
 export const isSessionExpired = () => {
   const bearerToken = getUserAuthDetailsFromLS();
-
+  console.log("--> bearerToken: ", bearerToken);
   if (bearerToken) {
-    const userAuthToken = bearerToken.split(" ")[1];
+    const userAuthToken = bearerToken.split("Bearer ")[1];
     const decodedToken = jwtDecode(userAuthToken);
     return !!(decodedToken.exp * 1000 < Date.now());
   }
@@ -32,9 +33,10 @@ export const isSessionExpired = () => {
 };
 
 export const setAuthorizationHeader = token => {
-  return (axios.defaults.headers.common["Authorization"] = `Bearer ${token}`);
+  const formattedToken = test(/Bearer /, token) ? token : `Bearer ${token}`;
+  return (axios.defaults.headers.common["Authorization"] = formattedToken);
 };
 
-export const removeAuthorizationHeader = token => {
+export const removeAuthorizationHeader = () => {
   return delete axios.defaults.headers.common["Authorization"];
 };

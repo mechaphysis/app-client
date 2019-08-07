@@ -14,12 +14,35 @@ import signup from "./components/pages/signup/SignUp";
 
 //AuthRoute HOC:
 import AuthRoute from "./components/templates/AuthRoute";
+//Auth helpers:
+import {
+  isSessionExpired,
+  setAuthorizationHeader,
+  getUserAuthDetailsFromLS
+} from "./utils/userAuth";
+
+//actions:
+import { logOutUser, getUserData } from "./redux/actions/userActions";
+//types:
+import { SET_AUTHENTICATED } from "./redux/actionTypes";
 
 //Molecule NavBar
 import NavBar from "./components/molecules/NavBar";
 import { MuiThemeProvider } from "@material-ui/core";
 
 const theme = createMuiTheme(customTheme);
+
+if (isSessionExpired()) {
+  store.dispatch(logOutUser());
+  window.location.href = "/login";
+} else {
+  console.log("--> else triggered");
+  store.dispatch({ type: SET_AUTHENTICATED });
+  const token = getUserAuthDetailsFromLS();
+  console.log("token: ", token);
+  setAuthorizationHeader(token);
+  store.dispatch(getUserData());
+}
 
 function App() {
   return (

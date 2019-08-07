@@ -3,7 +3,8 @@ import {
   SET_UNAUTHENTICATED,
   SET_ERRORS,
   CLEAR_ERRORS,
-  LOADING_UI
+  LOADING_UI,
+  LOADING_USER
 } from "../actionTypes";
 
 //Service:
@@ -29,7 +30,7 @@ export const signUpUser = (form, history) => dispatch => {
     .then(data => {
       setUserAuthDetailsInLS(data.token);
       setAuthorizationHeader(data.token);
-      dispatch(fetchUserData());
+      dispatch(getUserData());
       dispatch({
         type: CLEAR_ERRORS
       });
@@ -53,7 +54,7 @@ export const loginUser = (form, history) => dispatch => {
     .then(data => {
       setUserAuthDetailsInLS(data.token);
       setAuthorizationHeader(data.token);
-      dispatch(fetchUserData());
+      dispatch(getUserData());
       dispatch({
         type: CLEAR_ERRORS
       });
@@ -67,9 +68,13 @@ export const loginUser = (form, history) => dispatch => {
     });
 };
 
-export const fetchUserData = () => dispatch => {
+export const getUserData = () => dispatch => {
+  dispatch({
+    type: LOADING_USER
+  });
   getUserService()
     .then(userData => {
+      console.log("---> print userData: ", userData);
       dispatch({
         type: SET_USER,
         payload: userData

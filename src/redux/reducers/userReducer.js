@@ -1,7 +1,8 @@
 import {
   SET_USER,
   SET_AUTHENTICATED,
-  SET_UNAUTHENTICATED
+  SET_UNAUTHENTICATED,
+  LOADING_USER
 } from "../actionTypes";
 import {
   EMPTY_OBJECT_READONLY,
@@ -27,7 +28,13 @@ export default function(state = initialState, action) {
     case SET_USER:
       return {
         isAuthenticated: true,
+        loading: false,
         ...action.payload
+      };
+    case LOADING_USER:
+      return {
+        ...state,
+        loading: true
       };
     default:
       return state;

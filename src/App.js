@@ -32,14 +32,16 @@ import { MuiThemeProvider } from "@material-ui/core";
 
 const theme = createMuiTheme(customTheme);
 
-if (isSessionExpired()) {
-  store.dispatch(logOutUser());
-  window.location.href = "/login";
-} else {
-  store.dispatch({ type: SET_AUTHENTICATED });
-  const token = getUserAuthDetailsFromLS();
-  setAuthorizationHeader(token);
-  store.dispatch(getUserData());
+const token = getUserAuthDetailsFromLS();
+if (token) {
+  if (isSessionExpired()) {
+    store.dispatch(logOutUser());
+    window.location.href = "/login";
+  } else {
+    store.dispatch({ type: SET_AUTHENTICATED });
+    setAuthorizationHeader(token);
+    store.dispatch(getUserData());
+  }
 }
 
 function App() {

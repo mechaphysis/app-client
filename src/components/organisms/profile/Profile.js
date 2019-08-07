@@ -36,7 +36,6 @@ const styles = {
 
 const Profile = props => {
   const { classes, user, uploadImage, logOutUser } = props;
-
   let profileContent = user.loading ? (
     <p>Loading...</p>
   ) : user.isAuthenticated ? (

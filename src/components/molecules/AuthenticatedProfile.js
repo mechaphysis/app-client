@@ -12,6 +12,7 @@ import CalendarToday from "@material-ui/icons/CalendarToday";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import ToolTip from "@material-ui/core/Tooltip";
+import KeyboardReturn from "@material-ui/icons/KeyboardReturn";
 
 //FIXME: correct styling for avatar and placing by the side the icon for uploading image
 export const AuthenticatedProfile = props => {
@@ -28,10 +29,14 @@ export const AuthenticatedProfile = props => {
     formData.append("image", imageFile, imageFile.name);
     props.uploadImage(formData);
   };
+
   const handleEditImage = () => {
     const fileInput = document.getElementById("imageUpload");
     fileInput.click();
-    console.log("edit");
+  };
+
+  const handleLogOut = () => {
+    props.logOutUser();
   };
   return (
     <Paper className={classes.paper}>
@@ -80,6 +85,11 @@ export const AuthenticatedProfile = props => {
         <CalendarToday color="primary" />{" "}
         <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
       </div>
+      <ToolTip title="Log out" placement="top">
+        <IconButton onClick={handleLogOut}>
+          <KeyboardReturn color="primary" />
+        </IconButton>
+      </ToolTip>
     </Paper>
   );
 };

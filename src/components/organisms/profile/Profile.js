@@ -13,13 +13,19 @@ const styles = {
   },
   bigAvatar: {
     margin: 10,
-    width: 60,
-    height: 60
+    width: 200,
+    height: 200
   },
   buttons: {
     textAlign: "center",
     "& a": {
       margin: "20px 10px"
+    }
+  },
+  profile: {
+    "& hr": {
+      border: "none",
+      margin: "0 0 10px 0"
     }
   }
 }; //temporary

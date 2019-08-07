@@ -21,38 +21,40 @@ export const AuthenticatedProfile = props => {
 
   return (
     <Paper className={classes.paper}>
-      <Avatar alt={`Profile`} src={imageUrl} className={classes.bigAvatar} />
-      <MuiLink
-        component={Link}
-        to={`/users/${handle}`}
-        color="primary"
-        variant="h5"
-      >
-        @{handle}
-      </MuiLink>
-      <hr />
-      {bio && <Typography variant="body2">{bio}</Typography>}
-      <hr />
-      {location && (
-        <Fragment>
-          <LocationOn color="primary">
-            <span>{location}</span>
-          </LocationOn>
-          <hr />
-        </Fragment>
-      )}
-      {website && (
-        <Fragment>
-          <LinkIcon color="primary" />
-          <a href={website} target="_blank" rel="noopener noreferrer">
-            {" "}
-            {website}
-          </a>
-          <hr />
-        </Fragment>
-      )}
-      <CalendarToday color="primary" />{" "}
-      <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
+      <div className={classes.profile}>
+        <Avatar alt={`Profile`} src={imageUrl} className={classes.bigAvatar} />
+        <MuiLink
+          component={Link}
+          to={`/users/${handle}`}
+          color="primary"
+          variant="h5"
+        >
+          @{handle}
+        </MuiLink>
+        <hr />
+        {bio && <Typography variant="body2">{bio}</Typography>}
+        <hr />
+        {location && (
+          <Fragment>
+            <LocationOn color="primary">
+              <span>{location}</span>
+            </LocationOn>
+            <hr />
+          </Fragment>
+        )}
+        {website && (
+          <Fragment>
+            <LinkIcon color="primary" />
+            <a href={website} target="_blank" rel="noopener noreferrer">
+              {" "}
+              {website}
+            </a>
+            <hr />
+          </Fragment>
+        )}
+        <CalendarToday color="primary" />{" "}
+        <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
+      </div>
     </Paper>
   );
 };

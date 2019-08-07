@@ -2,19 +2,16 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
-//Auth helpers:
-import { isSessionExpired } from "../../utils/userAuth";
 
-const AuthRoute = ({ component: Component, ...rest }) => {
-  const sessionHasExpired = isSessionExpired();
+const AuthRoute = ({ component: Component, isAuthenticated, ...rest }) => {
   return (
     <Route
       {...rest}
       render={props =>
-        sessionHasExpired === true ? (
-          <Component {...props} />
-        ) : (
+        isAuthenticated === true ? (
           <Redirect to="/" />
+        ) : (
+          <Component {...props} />
         )
       }
     />

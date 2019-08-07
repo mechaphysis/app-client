@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-//Auth helpers:
-import { isUserAuthenticated, isSessionExpired } from "../../../utils/userAuth";
-
 //Redux
 import { connect } from "react-redux";
 import { loginUser } from "../../../redux/actions/userActions";
@@ -29,8 +26,6 @@ const Login = props => {
     email: "",
     password: ""
   });
-
-  if (isUserAuthenticated() && !isSessionExpired()) props.history.push("/");
 
   const handleSubmit = event => {
     event.preventDefault();

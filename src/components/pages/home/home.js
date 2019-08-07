@@ -3,6 +3,9 @@ import Grid from "@material-ui/core/Grid";
 import { fetchPosts } from "../../../services/postsService";
 import Post from "../../organisms/post/Post";
 import Profile from "../../organisms/profile/Profile";
+
+import { connect } from "react-redux";
+
 //FIXME: Set also as authorized route
 class Home extends Component {
   state = {
@@ -35,4 +38,7 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => ({
+  isAuthenticated: state.user.isAuthenticated
+});
+export default connect(mapStateToProps)(Home);

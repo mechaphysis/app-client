@@ -7,9 +7,6 @@ import { includes } from "ramda";
 //Service:
 import { signUpUser } from "../../../redux/actions/userActions";
 
-//Auth helpers:
-import { isUserAuthenticated, isSessionExpired } from "../../../utils/userAuth";
-
 //Material UI:
 import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid";
@@ -32,8 +29,6 @@ const SignUp = props => {
     password: "",
     confirmPassword: ""
   });
-
-  if (isUserAuthenticated() && !isSessionExpired()) props.history.push("/");
 
   const handleSubmit = event => {
     event.preventDefault();

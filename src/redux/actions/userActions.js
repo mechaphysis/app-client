@@ -48,7 +48,6 @@ export const loginUser = (form, history) => dispatch => {
   dispatch({
     type: LOADING_UI
   });
-  console.log("--->user action");
 
   loginService(form)
     .then(data => {
@@ -74,7 +73,6 @@ export const getUserData = () => dispatch => {
   });
   getUserService()
     .then(userData => {
-      console.log("---> print userData: ", userData);
       dispatch({
         type: SET_USER,
         payload: userData

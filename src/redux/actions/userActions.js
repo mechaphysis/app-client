@@ -11,7 +11,8 @@ import {
 import {
   signUpService,
   loginService,
-  getUserService
+  getUserService,
+  uploadImageService
 } from "../../services/userService";
 
 //Auth helpers:
@@ -87,4 +88,15 @@ export const logOutUser = () => dispatch => {
   dispatch({
     type: SET_UNAUTHENTICATED
   });
+};
+
+export const uploadImage = formData => dispatch => {
+  dispatch({
+    type: LOADING_USER
+  });
+  uploadImageService(formData)
+    .then(() => {
+      dispatch(getUserData());
+    })
+    .catch(error => console.log("Something went wrong: ", error));
 };

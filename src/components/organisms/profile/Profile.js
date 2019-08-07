@@ -4,6 +4,10 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import { connect } from "react-redux";
 import { AuthenticatedProfile } from "../../molecules/AuthenticatedProfile";
 import { ProfileNotFound } from "../../molecules/ProfileNotFound";
+
+//Redux actions:
+import { uploadImage, logOutUser } from "../../../redux/actions/userActions";
+
 const styles = {
   paper: {
     padding: 20
@@ -31,12 +35,17 @@ const styles = {
 }; //temporary
 
 const Profile = props => {
-  const { classes, user } = props;
+  const { classes, user, uploadImage, logOutUser } = props;
 
   let profileContent = user.loading ? (
     <p>Loading...</p>
   ) : user.isAuthenticated ? (
-    <AuthenticatedProfile classes={classes} user={user} />
+    <AuthenticatedProfile
+      classes={classes}
+      user={user}
+      uploadImage={uploadImage}
+      logOutUser={logOutUser}
+    />
   ) : (
     <ProfileNotFound classes={classes} />
   );
@@ -51,6 +60,13 @@ const mapStateToProps = state => ({
 
 Profile.propTypes = {
   user: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  logOutUser: PropTypes.func.isRequired,
+  uploadImage: PropTypes.func.isRequired
 };
-export default connect(mapStateToProps)(withStyles(styles)(Profile));
+
+const mapActionsToProps = { uploadImage, logOutUser };
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(withStyles(styles)(Profile));

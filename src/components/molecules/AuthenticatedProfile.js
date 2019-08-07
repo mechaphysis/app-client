@@ -15,13 +15,13 @@ export const AuthenticatedProfile = props => {
   const {
     classes,
     user: {
-      credentials: { imgUrl, handle, bio, website, location, createdAt }
+      credentials: { imageUrl, handle, bio, website, location, createdAt }
     }
   } = props;
 
   return (
     <Paper className={classes.paper}>
-      <Avatar alt={`Profile`} src={imgUrl} className={classes.bigAvatar} />
+      <Avatar alt={`Profile`} src={imageUrl} className={classes.bigAvatar} />
       <MuiLink
         component={Link}
         to={`/users/${handle}`}

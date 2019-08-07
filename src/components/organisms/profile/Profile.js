@@ -25,9 +25,9 @@ const styles = {
 }; //temporary
 
 const Profile = props => {
-  const { classes, loading, user } = props;
+  const { classes, user } = props;
 
-  let profileContent = loading ? (
+  let profileContent = user.loading ? (
     <p>Loading...</p>
   ) : user.isAuthenticated ? (
     <AuthenticatedProfile classes={classes} user={user} />

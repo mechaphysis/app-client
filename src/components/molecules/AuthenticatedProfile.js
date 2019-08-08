@@ -1,6 +1,11 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import dayjs from "dayjs";
+
+//Redux actions:
+import { uploadImage, logOutUser } from "../../redux/actions/userActions";
+
 //Material UI
 import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
@@ -9,15 +14,16 @@ import Typography from "@material-ui/core/Typography";
 import LocationOn from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
 import CalendarToday from "@material-ui/icons/CalendarToday";
-import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
-import ToolTip from "@material-ui/core/Tooltip";
 import KeyboardReturn from "@material-ui/icons/KeyboardReturn";
 import EditProfile from "./EditProfile";
 import ButtonWithTooltip from "../atoms/ButtonWithTooltip";
 
 //FIXME: correct styling for avatar and placing by the side the icon for uploading image
 export const AuthenticatedProfile = props => {
+  //connect to redux using hooks:
+  const dispatch = useDispatch();
+
   const {
     classes,
     user: {
@@ -29,7 +35,7 @@ export const AuthenticatedProfile = props => {
     const imageFile = event.target.files[0];
     const formData = new FormData();
     formData.append("image", imageFile, imageFile.name);
-    props.uploadImage(formData);
+    dispatch(uploadImage(formData));
   };
 
   const handleEditImage = () => {
@@ -38,7 +44,7 @@ export const AuthenticatedProfile = props => {
   };
 
   const handleLogOut = () => {
-    props.logOutUser();
+    dispatch(logOutUser());
   };
 
   return (

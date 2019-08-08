@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { PropTypes } from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { editUserDetails } from "../../redux/actions/userActions";
 
 import { EMPTY_STRING_READONLY } from "../../constants/emptyDefaults";
@@ -26,6 +25,13 @@ const styles = {
 };
 
 const EditProfile = props => {
+  // connect to redux store using hooks:
+  const dispatch = useDispatch();
+  const credentials = useSelector(store => store.user.credentials);
+
+  //Deestructure props
+  const { classes } = props;
+
   const [form, setValues] = useState({
     bio: EMPTY_STRING_READONLY,
     website: EMPTY_STRING_READONLY,
@@ -33,9 +39,10 @@ const EditProfile = props => {
     open: false
   });
 
-  //Deestructure props
-  const { credentials, classes } = props;
-
+  /**
+   * useEffect with and empty array as dependency (second argument)
+   * behaves like componentDidMount()
+   */
   useEffect(() => {
     setValues({
       ...form,
@@ -43,7 +50,7 @@ const EditProfile = props => {
       website: credentials.website ? credentials.website : "",
       location: credentials.location ? credentials.location : ""
     });
-  }, [credentials.bio, credentials.website, credentials.location]);
+  }, []);
 
   const handleOpenForm = () => {
     setValues({
@@ -79,9 +86,10 @@ const EditProfile = props => {
 
   const handleSubmit = () => {
     const userDetails = pick(["bio", "website", "location"], form);
-    props.editUserDetails(userDetails);
+    dispatch(editUserDetails(userDetails));
     handleClose();
   };
+
   const renderTextField = field => {
     return (
       <TextField
@@ -126,14 +134,4 @@ const EditProfile = props => {
   );
 };
 
-EditProfile.propTypes = {
-  editUserDetails: PropTypes.func.isRequired
-  //add classes
-};
-const mapStateToProps = state => ({
-  credentials: state.user.credentials
-});
-export default connect(
-  mapStateToProps,
-  { editUserDetails }
-)(withStyles(styles)(EditProfile));
+export default withStyles(styles)(EditProfile);

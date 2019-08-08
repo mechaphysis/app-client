@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
 import UnAuthenticatedButtons from "./UnAuthenticatedButtons";
@@ -8,8 +8,9 @@ import AuthenticatedButtons from "./AuthenticatedButtons";
 import AppBar from "@material-ui/core/AppBar";
 import ToolBar from "@material-ui/core/ToolBar";
 
-const NavBar = props => {
-  const { isAuthenticated } = props;
+const NavBar = () => {
+  // connect to redux using hooks:
+  const isAuthenticated = useSelector(store => store.user.isAuthenticated);
   return (
     <AppBar>
       <ToolBar className="nav-container">
@@ -23,10 +24,4 @@ const NavBar = props => {
   );
 };
 
-NavBar.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired
-};
-const mapStateToProps = state => ({
-  isAuthenticated: state.user.isAuthenticated
-});
-export default connect(mapStateToProps)(NavBar);
+export default NavBar;

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
 //Redux
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../../redux/actions/userActions";
 
 //Material UI:
@@ -21,6 +20,10 @@ const styles = formStyles;
 let formFields = ["email", "password"];
 
 const Login = props => {
+  // Connect to redux using hooks:
+  const dispatch = useDispatch();
+  const UI = useSelector(store => store.UI);
+
   //Using hooks for minimal state:
   const [form, setValues] = useState({
     email: "",
@@ -29,7 +32,7 @@ const Login = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    props.loginUser(form, props.history);
+    dispatch(loginUser(form, props.history));
   };
 
   const handleChange = event => {
@@ -57,10 +60,8 @@ const Login = props => {
     );
   };
 
-  let {
-    classes,
-    UI: { loading, errors }
-  } = props; //For the JSS styling
+  const { classes } = props; //For the JSS styling
+  const { loading, errors } = UI;
 
   const renderGeneralErrors = errors => {
     return errors.general ? (
@@ -109,22 +110,4 @@ const Login = props => {
   );
 };
 
-Login.propTypes = {
-  classes: PropTypes.object.isRequired,
-  loginUser: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
-  UI: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  user: state.user,
-  UI: state.UI
-});
-
-const mapActionsToProps = {
-  loginUser
-};
-export default connect(
-  mapStateToProps,
-  mapActionsToProps
-)(withStyles(styles)(Login));
+export default withStyles(styles)(Login);

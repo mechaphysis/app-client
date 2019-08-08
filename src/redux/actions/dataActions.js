@@ -21,7 +21,6 @@ export const getPosts = () => dispatch => {
 
   getPostsService()
     .then(data => {
-      console.log("--> data from service: ", data);
       dispatch({
         type: SET_POSTS,
         payload: data

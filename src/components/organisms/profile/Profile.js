@@ -1,12 +1,8 @@
 import React, { Fragment } from "react";
-import { PropTypes } from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { AuthenticatedProfile } from "../../molecules/AuthenticatedProfile";
 import { ProfileNotFound } from "../../molecules/ProfileNotFound";
-
-//Redux actions:
-import { uploadImage, logOutUser } from "../../../redux/actions/userActions";
 
 const styles = {
   paper: {
@@ -35,16 +31,14 @@ const styles = {
 }; //temporary
 
 const Profile = props => {
-  const { classes, user, uploadImage, logOutUser } = props;
+  // connect to redux using hooks:
+  const user = useSelector(store => store.user);
+
+  const { classes } = props;
   let profileContent = user.loading ? (
     <p>Loading...</p>
   ) : user.isAuthenticated ? (
-    <AuthenticatedProfile
-      classes={classes}
-      user={user}
-      uploadImage={uploadImage}
-      logOutUser={logOutUser}
-    />
+    <AuthenticatedProfile classes={classes} user={user} />
   ) : (
     <ProfileNotFound classes={classes} />
   );
@@ -52,20 +46,4 @@ const Profile = props => {
   return <Fragment>{profileContent}</Fragment>;
 };
 
-const mapStateToProps = state => ({
-  user: state.user,
-  loading: state.loading
-});
-
-Profile.propTypes = {
-  user: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired,
-  logOutUser: PropTypes.func.isRequired,
-  uploadImage: PropTypes.func.isRequired
-};
-
-const mapActionsToProps = { uploadImage, logOutUser };
-export default connect(
-  mapStateToProps,
-  mapActionsToProps
-)(withStyles(styles)(Profile));
+export default withStyles(styles)(Profile);

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { includes } from "ramda";
 
 //Service:
@@ -22,6 +21,10 @@ const styles = formStyles;
 let formFields = ["handle", "email", "password", "confirmPassword"];
 
 const SignUp = props => {
+  // connect to redux using hooks:
+  const dispatch = useDispatch();
+  const UI = useSelector(store => store.UI);
+
   //Using hooks for minimal state:
   const [form, setValues] = useState({
     handle: "",
@@ -32,7 +35,7 @@ const SignUp = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    props.signUpUser(form, props.history);
+    dispatch(signUpUser(form, props.history));
   };
 
   const handleChange = event => {
@@ -60,10 +63,10 @@ const SignUp = props => {
     );
   };
 
-  let {
-    classes,
-    UI: { loading, errors }
-  } = props; //For the JSS styling
+  const { classes } = props; //For the JSS styling
+
+  const { loading, errors } = UI;
+
   const renderGeneralErrors = errors => {
     return errors.general ? (
       <Typography variant="body2" className={classes.customError}>
@@ -111,22 +114,4 @@ const SignUp = props => {
   );
 };
 
-SignUp.propTypes = {
-  classes: PropTypes.object.isRequired,
-  signUpUser: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
-  UI: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  user: state.user,
-  UI: state.UI
-});
-
-const mapActionsToProps = {
-  signUpUser
-};
-export default connect(
-  mapStateToProps,
-  mapActionsToProps
-)(withStyles(styles)(SignUp));
+export default withStyles(styles)(SignUp);

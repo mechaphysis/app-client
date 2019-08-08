@@ -1,9 +1,11 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import { PropTypes } from "prop-types";
+import { useSelector } from "react-redux";
 
-const AuthRoute = ({ component: Component, isAuthenticated, ...rest }) => {
+const AuthRoute = ({ component: Component, ...rest }) => {
+  // connec to redux using hooks:
+  const isAuthenticated = useSelector(store => store.user.isAuthenticated);
+
   return (
     <Route
       {...rest}
@@ -18,12 +20,4 @@ const AuthRoute = ({ component: Component, isAuthenticated, ...rest }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.user.isAuthenticated
-});
-
-AuthRoute.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired
-};
-
-export default connect(mapStateToProps)(AuthRoute);
+export default AuthRoute;

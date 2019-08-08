@@ -1,27 +1,32 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
+import UnAuthenticatedButtons from "./UnAuthenticatedButtons";
+import AuthenticatedButtons from "./AuthenticatedButtons";
 //Material UI
 import AppBar from "@material-ui/core/AppBar";
 import ToolBar from "@material-ui/core/ToolBar";
-import Button from "@material-ui/core/Button";
 
-function NavBar() {
+const NavBar = props => {
+  const { isAuthenticated } = props;
   return (
     <AppBar>
       <ToolBar className="nav-container">
-        <Button color="inherit" component={Link} to="/login">
-          Login
-        </Button>
-        <Button color="inherit" component={Link} to="/">
-          Home
-        </Button>
-        <Button color="inherit" component={Link} to="/signup">
-          Signup
-        </Button>
+        {isAuthenticated ? (
+          <AuthenticatedButtons />
+        ) : (
+          <UnAuthenticatedButtons />
+        )}
       </ToolBar>
     </AppBar>
   );
-}
+};
 
-export default NavBar;
+NavBar.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired
+};
+const mapStateToProps = state => ({
+  isAuthenticated: state.user.isAuthenticated
+});
+export default connect(mapStateToProps)(NavBar);

@@ -22,7 +22,11 @@ import {
 } from "@material-ui/core";
 import { map, pick } from "ramda";
 
-const styles = EMPTY_OBJECT_READONLY;
+const styles = {
+  button: {
+    float: "right"
+  }
+};
 
 const EditProfile = props => {
   const [form, setValues] = useState({

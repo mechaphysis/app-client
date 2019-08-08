@@ -15,6 +15,7 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 //Styling using JSS:
+// FIXME: use global theme instead
 import { formStyles } from "../../../styles/general";
 const styles = formStyles;
 

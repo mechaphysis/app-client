@@ -39,10 +39,25 @@ const post = (resource, payload) => {
     });
 };
 
+const del = resource => {
+  return axios
+    .delete(resource)
+    .then(response => response.data)
+    .catch(error => {
+      console.log(
+        "Delete Request Failed: ",
+        error.response.status,
+        "response: ",
+        error.response.data
+      );
+      throw error;
+    });
+};
+
 const REQUEST = {
   get,
-  post
-  //delete
+  post,
+  del
 };
 
 export default REQUEST;

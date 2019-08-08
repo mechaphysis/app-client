@@ -14,6 +14,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import ToolTip from "@material-ui/core/Tooltip";
 import KeyboardReturn from "@material-ui/icons/KeyboardReturn";
 import EditProfile from "./EditProfile";
+import ButtonWithTooltip from "../atoms/ButtonWithTooltip";
 
 //FIXME: correct styling for avatar and placing by the side the icon for uploading image
 export const AuthenticatedProfile = props => {
@@ -50,11 +51,13 @@ export const AuthenticatedProfile = props => {
           hidden="hidden"
           onChange={handleImageChange}
         />
-        <ToolTip title="Change Profile Picture" placement="top">
-          <IconButton onClick={handleEditImage} className="button">
-            <EditIcon color="primary" />
-          </IconButton>
-        </ToolTip>
+        <ButtonWithTooltip
+          tipTitle="Change Profile Picture"
+          handleClick={handleEditImage}
+          btnClass="button"
+        >
+          <EditIcon color="primary" />
+        </ButtonWithTooltip>
         <MuiLink
           component={Link}
           to={`/users/${handle}`}
@@ -87,11 +90,9 @@ export const AuthenticatedProfile = props => {
         <CalendarToday color="primary" />{" "}
         <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
       </div>
-      <ToolTip title="Log out" placement="top">
-        <IconButton onClick={handleLogOut}>
-          <KeyboardReturn color="primary" />
-        </IconButton>
-      </ToolTip>
+      <ButtonWithTooltip tipTitle="Logout" handleClick={handleLogOut}>
+        <KeyboardReturn color="primary" />{" "}
+      </ButtonWithTooltip>
       <EditProfile />
     </Paper>
   );

@@ -4,14 +4,10 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import { connect } from "react-redux";
 import { editUserDetails } from "../../redux/actions/userActions";
 
-import {
-  EMPTY_STRING_READONLY,
-  EMPTY_OBJECT_READONLY
-} from "../../constants/emptyDefaults";
+import { EMPTY_STRING_READONLY } from "../../constants/emptyDefaults";
 
-import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
-import ToolTip from "@material-ui/core/Tooltip";
+
 import {
   Dialog,
   DialogTitle,
@@ -21,6 +17,7 @@ import {
   Button
 } from "@material-ui/core";
 import { map, pick } from "ramda";
+import ButtonWithTooltip from "../atoms/ButtonWithTooltip";
 
 const styles = {
   button: {
@@ -104,11 +101,13 @@ const EditProfile = props => {
   };
   return (
     <Fragment>
-      <ToolTip title="Edit details" placement="top">
-        <IconButton onClick={handleOpenForm} className={classes.button}>
-          <EditIcon color="primary" />
-        </IconButton>
-      </ToolTip>
+      <ButtonWithTooltip
+        tipTitle="Edit details"
+        handleClick={handleOpenForm}
+        btnClass={classes.button}
+      >
+        <EditIcon color="primary" />
+      </ButtonWithTooltip>
       <Dialog open={form.open} onClose={handleClose} fullWidth maxWidth="sm">
         <DialogTitle>Edit your details</DialogTitle>
         <DialogContent>

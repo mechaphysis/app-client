@@ -12,7 +12,8 @@ import {
   signUpService,
   loginService,
   getUserService,
-  uploadImageService
+  uploadImageService,
+  editUserDetailsService
 } from "../../services/userService";
 
 //Auth helpers:
@@ -98,5 +99,14 @@ export const uploadImage = formData => dispatch => {
     .then(() => {
       dispatch(getUserData());
     })
+    .catch(error => console.log("Something went wrong: ", error));
+};
+
+export const editUserDetails = formData => dispatch => {
+  dispatch({
+    type: LOADING_USER
+  });
+  editUserDetailsService(formData)
+    .then(() => dispatch(getUserData()))
     .catch(error => console.log("Something went wrong: ", error));
 };

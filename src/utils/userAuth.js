@@ -22,7 +22,6 @@ export const isUserAuthenticated = () => {
 
 export const isSessionExpired = () => {
   const bearerToken = getUserAuthDetailsFromLS();
-  console.log("--> bearerToken: ", bearerToken);
   if (bearerToken) {
     const userAuthToken = bearerToken.split("Bearer ")[1];
     const decodedToken = jwtDecode(userAuthToken);

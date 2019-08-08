@@ -13,6 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import ToolTip from "@material-ui/core/Tooltip";
 import KeyboardReturn from "@material-ui/icons/KeyboardReturn";
+import EditProfile from "./EditProfile";
 
 //FIXME: correct styling for avatar and placing by the side the icon for uploading image
 export const AuthenticatedProfile = props => {
@@ -38,6 +39,7 @@ export const AuthenticatedProfile = props => {
   const handleLogOut = () => {
     props.logOutUser();
   };
+
   return (
     <Paper className={classes.paper}>
       <div className={classes.profile}>
@@ -90,6 +92,7 @@ export const AuthenticatedProfile = props => {
           <KeyboardReturn color="primary" />
         </IconButton>
       </ToolTip>
+      <EditProfile />
     </Paper>
   );
 };

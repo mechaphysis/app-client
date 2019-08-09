@@ -12,4 +12,4 @@ export const unlikePostService = postId =>
 export const commentPostService = (postId, payload) =>
   request.post(`/post/${postId}/like`, payload);
 
-export const deletePostService = postId => request.delete(`/post/${postId}`);
+export const deletePostService = postId => request.del(`/post/${postId}`);

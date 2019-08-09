@@ -1,5 +1,6 @@
 export const postStyles = {
   card: {
+    position: "relative",
     display: "flex",
     marginBottom: 20
   },

@@ -22,6 +22,7 @@ import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 //Styles in JSS manner:
 import { postStyles } from "./styles";
 import ButtonWithTooltip from "../../atoms/ButtonWithTooltip";
+import DeletePost from "../../atoms/DeletePost";
 const styles = postStyles;
 
 //Extend dayjs to show date in format 'X days ago'
@@ -71,6 +72,12 @@ const Post = props => {
       </ButtonWithTooltip>
     );
   };
+
+  const renderDeleteButton = () => {
+    return user.isAuthenticated && userHandle === user.credentials.handle ? (
+      <DeletePost postId={postId} />
+    ) : null;
+  };
   return (
     <Card className={classes.card}>
       <CardMedia
@@ -87,6 +94,7 @@ const Post = props => {
         >
           {userHandle}
         </Typography>
+        {renderDeleteButton()}
         <Typography variant="body2" color="textSecondary">
           {dayjs(createdAt).fromNow()}
         </Typography>

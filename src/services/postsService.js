@@ -13,3 +13,5 @@ export const commentPostService = (postId, payload) =>
   request.post(`/post/${postId}/like`, payload);
 
 export const deletePostService = postId => request.del(`/post/${postId}`);
+
+export const addPostService = payload => request.post(`/post`, payload);

@@ -22,5 +22,13 @@ export const formStyles = {
   },
   progress: {
     position: "absolute"
+  },
+  submitButton: {
+    position: "relative"
+  },
+  closeButton: {
+    position: "absolute",
+    left: "90%",
+    top: "10%"
   }
 };

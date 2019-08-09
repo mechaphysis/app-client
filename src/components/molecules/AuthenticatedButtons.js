@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import ButtonWithTooltip from "../atoms/ButtonWithTooltip";
-import AddIcon from "@material-ui/icons/Add";
+import PublishPost from "../atoms/PublishPost";
 import HomeIcon from "@material-ui/icons/Home";
 import Notifications from "@material-ui/icons/Notifications";
 import { Link } from "@material-ui/core";
@@ -8,9 +8,7 @@ import { Link } from "@material-ui/core";
 const AuthenticatedButtons = () => {
   return (
     <Fragment>
-      <ButtonWithTooltip tipTitle="Publish a Post">
-        <AddIcon color="action" />
-      </ButtonWithTooltip>
+      <PublishPost />
       <Link to="/">
         <ButtonWithTooltip tipTitle="Home">
           <HomeIcon color="action" />

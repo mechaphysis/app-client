@@ -3,7 +3,10 @@ import {
   LOADING_DATA,
   LIKE_POST,
   UNLIKE_POST,
-  DELETE_POST
+  DELETE_POST,
+  CREATE_POST,
+  SET_ERRORS,
+  CLEAR_ERRORS
 } from "../actionTypes";
 
 import {
@@ -12,7 +15,8 @@ import {
   likePostService,
   unlikePostService,
   commentPostService,
-  deletePostService
+  deletePostService,
+  addPostService
 } from "../../services/postsService";
 import { EMPTY_ARRAY_READONLY } from "../../constants/emptyDefaults";
 
@@ -68,4 +72,26 @@ export const deletePost = postId => dispatch => {
       });
     })
     .catch(error => console.log("Something went wrong: ", error));
+};
+
+export const addPost = body => dispatch => {
+  dispatch({ type: LOADING_DATA });
+
+  addPostService(body)
+    .then(data => {
+      dispatch({
+        type: CREATE_POST,
+        payload: data
+      });
+      dispatch({
+        type: CLEAR_ERRORS
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: error.response.data
+      });
+      console.log("Something went wrong: ", error);
+    });
 };

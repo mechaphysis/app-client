@@ -3,7 +3,8 @@ import {
   SET_POSTS,
   LIKE_POST,
   UNLIKE_POST,
-  LOADING_DATA
+  LOADING_DATA,
+  DELETE_POST
 } from "../actionTypes";
 import {
   EMPTY_ARRAY_READONLY,
@@ -31,10 +32,18 @@ export default function(state = initialState, action) {
       };
     case LIKE_POST:
     case UNLIKE_POST:
-      let index = findIndex(propEq("postId", action.payload.postId))(
+      let unlikedPostIndex = findIndex(propEq("postId", action.payload.postId))(
         state.posts
       );
-      state.posts[index] = action.payload;
+      state.posts[unlikedPostIndex] = action.payload;
+      return {
+        ...state
+      };
+    case DELETE_POST:
+      let deletedPostIndex = findIndex(propEq("postId", action.payload))(
+        state.posts
+      );
+      state.posts.splice(deletedPostIndex, 1);
       return {
         ...state
       };

@@ -2,7 +2,8 @@ import {
   SET_POSTS,
   LOADING_DATA,
   LIKE_POST,
-  UNLIKE_POST
+  UNLIKE_POST,
+  DELETE_POST
 } from "../actionTypes";
 
 import {
@@ -10,7 +11,8 @@ import {
   getPostService,
   likePostService,
   unlikePostService,
-  commentPostService
+  commentPostService,
+  deletePostService
 } from "../../services/postsService";
 import { EMPTY_ARRAY_READONLY } from "../../constants/emptyDefaults";
 
@@ -52,6 +54,17 @@ export const unlikePost = postId => dispatch => {
       dispatch({
         type: UNLIKE_POST,
         payload: data
+      });
+    })
+    .catch(error => console.log("Something went wrong: ", error));
+};
+
+export const deletePost = postId => dispatch => {
+  deletePostService(postId)
+    .then(() => {
+      dispatch({
+        type: DELETE_POST,
+        payload: postId
       });
     })
     .catch(error => console.log("Something went wrong: ", error));

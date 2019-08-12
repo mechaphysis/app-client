@@ -28,8 +28,8 @@ export default function(state = initialState, action) {
     case SET_POSTS:
       return {
         ...state,
-        posts: action.payload,
-        loading: false
+        loading: false,
+        posts: action.payload
       };
     case LIKE_POST:
     case UNLIKE_POST:
@@ -51,6 +51,7 @@ export default function(state = initialState, action) {
     case CREATE_POST:
       return {
         ...state,
+        loading: false,
         posts: [action.payload, ...state.posts]
       };
     default:

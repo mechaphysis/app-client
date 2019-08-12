@@ -40,6 +40,7 @@ const PublishPost = props => {
   const handleSubmit = event => {
     event.preventDefault();
     dispatch(addPost({ body: body }));
+    handleClose();
   };
   return (
     <Fragment>

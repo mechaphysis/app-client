@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
-import ButtonWithTooltip from "./ButtonWithTooltip";
+import ButtonWithTooltip from "../atoms/ButtonWithTooltip";
 import { useDispatch } from "react-redux";
 
 import { deletePost } from "../../redux/actions/dataActions";

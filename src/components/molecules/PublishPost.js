@@ -28,7 +28,7 @@ const styles = formStyles;
 const PublishPost = props => {
   const [open, setOpen] = useState(false);
   const [body, setBody] = useState(EMPTY_STRING_READONLY);
-  const [errors, setErrors] = useState(EMPTY_OBJECT_READONLY);
+  const [errors, setErrors] = useState(EMPTY_OBJECT_READONLY); // FIXME: errors not showing
   const dispatch = useDispatch();
   const UI = useSelector(store => store.UI);
   const { loading } = UI;

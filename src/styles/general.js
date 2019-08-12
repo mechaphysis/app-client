@@ -24,7 +24,9 @@ export const formStyles = {
     position: "absolute"
   },
   submitButton: {
-    position: "relative"
+    position: "relative",
+    float: "right",
+    marginTop: 10
   },
   closeButton: {
     position: "absolute",

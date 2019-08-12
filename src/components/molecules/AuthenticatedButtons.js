@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import ButtonWithTooltip from "../atoms/ButtonWithTooltip";
-import PublishPost from "../atoms/PublishPost";
+import PublishPost from "./PublishPost";
 import HomeIcon from "@material-ui/icons/Home";
 import Notifications from "@material-ui/icons/Notifications";
 import { Link } from "@material-ui/core";

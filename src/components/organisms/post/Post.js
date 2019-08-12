@@ -22,7 +22,7 @@ import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 //Styles in JSS manner:
 import { postStyles } from "./styles";
 import ButtonWithTooltip from "../../atoms/ButtonWithTooltip";
-import DeletePost from "../../atoms/DeletePost";
+import DeletePost from "../../molecules/DeletePost";
 const styles = postStyles;
 
 //Extend dayjs to show date in format 'X days ago'

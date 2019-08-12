@@ -27,7 +27,6 @@ const DeletePost = props => {
   const { classes, postId } = props;
 
   const handleOpen = () => {
-    console.log("-- open clicked");
     setOpen(true);
   };
   const handleClose = () => setOpen(false);

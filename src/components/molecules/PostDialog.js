@@ -9,6 +9,7 @@ import { getPost } from "../../redux/actions/dataActions";
 import ButtonWithTooltip from "../atoms/ButtonWithTooltip";
 
 // Material UI
+import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import DialogContent from "@material-ui/core/DialogContent";
 import Dialog from "@material-ui/core/Dialog";
@@ -27,6 +28,18 @@ const styles = {
   hiddenHR: {
     border: "none",
     margin: 4
+  },
+  bigAvatar: {
+    margin: 10,
+    width: 200,
+    height: 200
+  },
+  closeButton: {
+    position: "absolute",
+    left: "90%"
+  },
+  dialogContent: {
+    padding: 20
   }
 };
 
@@ -49,11 +62,11 @@ const PostDialog = props => {
       <CircularProgress size={200} />
     ) : (
       <Grid container spacing={10}>
-        <Grid item sm={3}>
-          <img
+        <Grid item sm={5}>
+          <Avatar
+            alt={`Profile`}
             src={post.userImage}
-            alt="Profile"
-            className={classes.profileImage}
+            className={classes.bigAvatar}
           />
         </Grid>
         <Grid item sm={7}>
@@ -92,7 +105,6 @@ const PostDialog = props => {
         >
           <CloseIcon />
         </ButtonWithTooltip>
-        <DialogTitle>Publish a new Post</DialogTitle>
         <DialogContent className={classes.dialogContent}>
           {renderContent()}
         </DialogContent>

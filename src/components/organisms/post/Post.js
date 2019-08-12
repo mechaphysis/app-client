@@ -5,6 +5,11 @@ import { find, propEq } from "ramda";
 // redux actions:
 import { likePost, unlikePost } from "../../../redux/actions/dataActions";
 
+// Components:
+import ButtonWithTooltip from "../../atoms/ButtonWithTooltip";
+import DeletePost from "../../molecules/DeletePost";
+import PostDialog from "../../molecules/PostDialog";
+
 //For date formatting:
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -21,8 +26,6 @@ import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 
 //Styles in JSS manner:
 import { postStyles } from "./styles";
-import ButtonWithTooltip from "../../atoms/ButtonWithTooltip";
-import DeletePost from "../../molecules/DeletePost";
 const styles = postStyles;
 
 //Extend dayjs to show date in format 'X days ago'
@@ -105,6 +108,7 @@ const Post = props => {
           <ChatIcon color="primary" />
         </ButtonWithTooltip>
         <span>{commentCount} Comments</span>
+        <PostDialog postId={postId} userHandle={userHandle} />
       </CardContent>
     </Card>
   );

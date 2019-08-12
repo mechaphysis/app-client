@@ -1,6 +1,7 @@
 import { findIndex, propEq } from "ramda";
 import {
   SET_POSTS,
+  SET_POST,
   LIKE_POST,
   UNLIKE_POST,
   LOADING_DATA,
@@ -30,6 +31,12 @@ export default function(state = initialState, action) {
         ...state,
         loading: false,
         posts: action.payload
+      };
+    case SET_POST:
+      return {
+        ...state,
+        loading: false,
+        post: action.payload
       };
     case LIKE_POST:
     case UNLIKE_POST:

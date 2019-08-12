@@ -1,5 +1,6 @@
 import {
   SET_POSTS,
+  SET_POST,
   LOADING_DATA,
   LIKE_POST,
   UNLIKE_POST,
@@ -18,7 +19,10 @@ import {
   deletePostService,
   addPostService
 } from "../../services/postsService";
-import { EMPTY_ARRAY_READONLY } from "../../constants/emptyDefaults";
+import {
+  EMPTY_ARRAY_READONLY,
+  EMPTY_OBJECT_READONLY
+} from "../../constants/emptyDefaults";
 
 export const getPosts = () => dispatch => {
   dispatch({
@@ -36,6 +40,27 @@ export const getPosts = () => dispatch => {
       dispatch({
         type: SET_POSTS,
         payload: EMPTY_ARRAY_READONLY
+      });
+      console.log("Something went wrong: ", error);
+    });
+};
+
+export const getPost = postId => dispatch => {
+  dispatch({
+    type: LOADING_DATA
+  });
+
+  getPostService(postId)
+    .then(data => {
+      dispatch({
+        type: SET_POST,
+        payload: data
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: SET_POST,
+        payload: EMPTY_OBJECT_READONLY
       });
       console.log("Something went wrong: ", error);
     });

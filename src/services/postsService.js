@@ -2,7 +2,7 @@ import request from "../utils/request";
 
 export const getPostsService = () => request.get("/posts");
 
-export const getPostService = postId => request.get(`/posts/${postId}`);
+export const getPostService = postId => request.get(`/post/${postId}`);
 
 export const likePostService = postId => request.post(`/post/${postId}/like`);
 

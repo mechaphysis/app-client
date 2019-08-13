@@ -116,6 +116,7 @@ export const addPost = body => dispatch => {
       dispatch({
         type: CLEAR_ERRORS
       });
+      dispatch({ type: STOP_LOADING_UI });
     })
     .catch(error => {
       dispatch({

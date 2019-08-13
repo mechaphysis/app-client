@@ -1,4 +1,4 @@
-import { findIndex, propEq } from "ramda";
+import { findIndex, propEq, reject, update } from "ramda";
 import {
   SET_POSTS,
   SET_POST,
@@ -40,20 +40,21 @@ export default function(state = initialState, action) {
       };
     case LIKE_POST:
     case UNLIKE_POST:
-      let unlikedPostIndex = findIndex(propEq("postId", action.payload.postId))(
-        state.posts
-      );
-      state.posts[unlikedPostIndex] = action.payload;
+      let affectedPostIndex = findIndex(
+        propEq("postId", action.payload.postId)
+      )(state.posts);
+      let updatedPosts = update(affectedPostIndex, action.payload, state.posts);
       return {
-        ...state
+        ...state,
+        posts: updatedPosts
       };
     case DELETE_POST:
-      let deletedPostIndex = findIndex(propEq("postId", action.payload))(
+      let postsWithoutDeleted = reject(propEq("postId", action.payload))(
         state.posts
       );
-      state.posts.splice(deletedPostIndex, 1);
       return {
-        ...state
+        ...state,
+        posts: postsWithoutDeleted
       };
     case CREATE_POST:
       return {

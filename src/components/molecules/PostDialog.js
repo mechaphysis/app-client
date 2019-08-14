@@ -23,6 +23,7 @@ import UnfoldMore from "@material-ui/icons/UnfoldMore";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 import dayjs from "dayjs";
+import { isAbsolute } from "path";
 
 const styles = {
   hiddenHR: {
@@ -40,6 +41,15 @@ const styles = {
   },
   dialogContent: {
     padding: 20
+  },
+  expandButton: {
+    position: "absolute",
+    right: "2.3%"
+  },
+  circularProgressContainer: {
+    textAlign: "center",
+    paddingTop: 50,
+    paddingBottom: 50
   }
 };
 
@@ -59,7 +69,11 @@ const PostDialog = props => {
   const handleClose = () => setOpen(false);
   const renderContent = () => {
     return UI.loading ? (
-      <CircularProgress size={200} />
+      <Grid container spacing={10}>
+        <Grid item sm={10} className={classes.circularProgressContainer}>
+          <CircularProgress size={200} thickness={2} />
+        </Grid>
+      </Grid>
     ) : (
       <Grid container spacing={10}>
         <Grid item sm={5}>

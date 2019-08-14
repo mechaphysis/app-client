@@ -70,7 +70,12 @@ const Post = props => {
           <ChatIcon color="primary" />
         </ButtonWithTooltip>
         <span>{commentCount} Comments</span>
-        <PostDialog postId={postId} userHandle={userHandle} />
+        <PostDialog
+          postId={postId}
+          userHandle={userHandle}
+          likeCount={likeCount}
+          commentCount={commentCount}
+        />
       </CardContent>
     </Card>
   );

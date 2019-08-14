@@ -11,6 +11,7 @@ import ButtonWithTooltip from "../atoms/ButtonWithTooltip";
 // Material UI
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
+import ChatIcon from "@material-ui/icons/Chat";
 import DialogContent from "@material-ui/core/DialogContent";
 import Dialog from "@material-ui/core/Dialog";
 import Grid from "@material-ui/core/Grid";
@@ -21,6 +22,7 @@ import UnfoldMore from "@material-ui/icons/UnfoldMore";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 import dayjs from "dayjs";
+import LikeButton from "../atoms/LikeButton";
 
 const styles = {
   hiddenHR: {
@@ -54,10 +56,11 @@ const PostDialog = props => {
   const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
+  const user = useSelector(store => store.user);
   const post = useSelector(store => store.data.post);
   const UI = useSelector(store => store.UI);
 
-  const { classes, postId, userHandle } = props;
+  const { classes, postId, userHandle, commentCount, likeCount } = props;
 
   const handleOpen = () => {
     dispatch(getPost(postId));
@@ -95,6 +98,12 @@ const PostDialog = props => {
           </Typography>
           <hr className={classes.hiddenHR} />
           <Typography variant="body1">{post.body}</Typography>
+          <LikeButton postId={postId} user={user} />
+          <span>{likeCount} Likes</span>
+          <ButtonWithTooltip tipTitle="comments">
+            <ChatIcon color="primary" />
+          </ButtonWithTooltip>
+          <span>{commentCount} Comments</span>
         </Grid>
       </Grid>
     );

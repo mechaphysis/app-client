@@ -1,5 +1,5 @@
 import React from "react";
-import DeletePost from "../molecules/DeletePost";
+import DeletePost from "../molecules/DeletePostDialog";
 
 const DeleteButton = props => {
   const { postId, user, userHandle } = props;

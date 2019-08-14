@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 // Components:
 import ButtonWithTooltip from "../../atoms/ButtonWithTooltip";
-import PostDialog from "../../molecules/PostDialog";
+import PostDialog from "../../molecules/PostDetailsDialog";
 import LikeButton from "../../atoms/LikeButton";
 import DeleteButton from "../../atoms/DeleteButton";
 

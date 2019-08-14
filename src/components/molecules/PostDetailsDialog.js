@@ -7,10 +7,10 @@ import { getPost } from "../../redux/actions/dataActions";
 
 // Components
 import ButtonWithTooltip from "../atoms/ButtonWithTooltip";
+import Comments from "./Comments";
 
 // Material UI
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
 import ChatIcon from "@material-ui/icons/Chat";
 import DialogContent from "@material-ui/core/DialogContent";
 import Dialog from "@material-ui/core/Dialog";
@@ -28,6 +28,11 @@ const styles = {
   hiddenHR: {
     border: "none",
     margin: 4
+  },
+  visibleHR: {
+    width: "100%",
+    borderBottom: "1px solid rgba(0,0,0,0.1)",
+    marginBottom: "20px"
   },
   bigAvatar: {
     margin: 10,
@@ -104,6 +109,8 @@ const PostDialog = props => {
             <ChatIcon color="primary" />
           </ButtonWithTooltip>
           <span>{commentCount} Comments</span>
+          <hr className={classes.visibleHR} />
+          <Comments comments={post.comments} />
         </Grid>
       </Grid>
     );

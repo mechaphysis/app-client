@@ -34,3 +34,26 @@ export const formStyles = {
     top: "10%"
   }
 };
+
+export const separatorStyles = {
+  hiddenHR: {
+    border: "none",
+    margin: 4
+  },
+  visibleHR: {
+    width: "100%",
+    borderBottom: "1px solid rgba(0,0,0,0.1)",
+    marginBottom: "20px"
+  }
+};
+
+export const avatarStyles = {
+  avatar: {
+    margin: 10
+  },
+  bigAvatar: {
+    margin: 10,
+    width: 200,
+    height: 200
+  }
+};

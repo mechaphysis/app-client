@@ -3,18 +3,12 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import { useSelector } from "react-redux";
 import { AuthenticatedProfile } from "../../molecules/AuthenticatedProfile";
 import { ProfileNotFound } from "../../molecules/ProfileNotFound";
+import { avatarStyles } from "../../../styles/general";
 
 const styles = {
+  ...avatarStyles,
   paper: {
     padding: 20
-  },
-  avatar: {
-    margin: 10
-  },
-  bigAvatar: {
-    margin: 10,
-    width: 200,
-    height: 200
   },
   buttons: {
     textAlign: "center",

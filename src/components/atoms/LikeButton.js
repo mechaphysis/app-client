@@ -29,11 +29,11 @@ const LikeButton = props => {
       </ButtonWithTooltip>
     )
   ) : (
-    <ButtonWithTooltip tipTitle="Like">
-      <Link to="/login">
+    <Link to="/login">
+      <ButtonWithTooltip tipTitle="Like">
         <FavoriteBorder color="primary" />
-      </Link>
-    </ButtonWithTooltip>
+      </ButtonWithTooltip>
+    </Link>
   );
 };
 

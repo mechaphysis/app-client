@@ -1,14 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { find, propEq } from "ramda";
-// redux actions:
-import { likePost, unlikePost } from "../../../redux/actions/dataActions";
+import { useSelector } from "react-redux";
 
 // Components:
 import ButtonWithTooltip from "../../atoms/ButtonWithTooltip";
-import DeletePost from "../../molecules/DeletePost";
 import PostDialog from "../../molecules/PostDialog";
+import LikeButton from "../../atoms/LikeButton";
+import DeleteButton from "../../atoms/DeleteButton";
 
 //For date formatting:
 import dayjs from "dayjs";
@@ -21,19 +19,16 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import ChatIcon from "@material-ui/icons/Chat";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 
 //Styles in JSS manner:
 import { postStyles } from "./styles";
-const styles = postStyles;
 
+const styles = postStyles;
 //Extend dayjs to show date in format 'X days ago'
 dayjs.extend(relativeTime);
 
 const Post = props => {
   // connect to redux store:
-  const dispatch = useDispatch();
   const user = useSelector(store => store.user);
   const {
     classes,
@@ -48,39 +43,6 @@ const Post = props => {
     }
   } = props;
 
-  const isPostLiked = () => {
-    return user.likes && find(propEq("postId", postId))(user.likes)
-      ? true
-      : false;
-  };
-  const handleLike = () => dispatch(likePost(postId));
-  const handleUnlike = () => dispatch(unlikePost(postId));
-
-  const renderlikeButton = () => {
-    return user.isAuthenticated ? (
-      isPostLiked() ? (
-        <ButtonWithTooltip tipTitle="Unlike" handleClick={handleUnlike}>
-          <FavoriteIcon color="primary" />
-        </ButtonWithTooltip>
-      ) : (
-        <ButtonWithTooltip tipTitle="Like" handleClick={handleLike}>
-          <FavoriteBorder color="primary" />
-        </ButtonWithTooltip>
-      )
-    ) : (
-      <ButtonWithTooltip tipTitle="Like">
-        <Link to="/login">
-          <FavoriteBorder color="primary" />
-        </Link>
-      </ButtonWithTooltip>
-    );
-  };
-
-  const renderDeleteButton = () => {
-    return user.isAuthenticated && userHandle === user.credentials.handle ? (
-      <DeletePost postId={postId} />
-    ) : null;
-  };
   return (
     <Card className={classes.card}>
       <CardMedia
@@ -97,12 +59,12 @@ const Post = props => {
         >
           {userHandle}
         </Typography>
-        {renderDeleteButton()}
+        <DeleteButton user={user} userHandle={userHandle} postId={postId} />
         <Typography variant="body2" color="textSecondary">
           {dayjs(createdAt).fromNow()}
         </Typography>
         <Typography variant="body1">{body}</Typography>
-        {renderlikeButton()}
+        <LikeButton postId={postId} user={user} />
         <span>{likeCount} Likes</span>
         <ButtonWithTooltip tipTitle="comments">
           <ChatIcon color="primary" />

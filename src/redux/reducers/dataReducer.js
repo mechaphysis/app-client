@@ -6,7 +6,8 @@ import {
   UNLIKE_POST,
   LOADING_DATA,
   DELETE_POST,
-  CREATE_POST
+  CREATE_POST,
+  SUBMIT_COMMENT
 } from "../actionTypes";
 import {
   EMPTY_ARRAY_READONLY,
@@ -61,6 +62,14 @@ export default function(state = initialState, action) {
         ...state,
         loading: false,
         posts: [action.payload, ...state.posts]
+      };
+    case SUBMIT_COMMENT:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          comments: [action.payload, ...state.post.comments]
+        }
       };
     default:
       return state;

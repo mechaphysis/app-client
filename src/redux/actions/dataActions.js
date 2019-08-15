@@ -9,7 +9,8 @@ import {
   DELETE_POST,
   CREATE_POST,
   SET_ERRORS,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  SUBMIT_COMMENT
 } from "../actionTypes";
 
 import {
@@ -117,6 +118,26 @@ export const addPost = body => dispatch => {
         type: CLEAR_ERRORS
       });
       dispatch({ type: STOP_LOADING_UI });
+    })
+    .catch(error => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: error.response.data
+      });
+      console.log("Something went wrong: ", error);
+    });
+};
+
+export const submitComment = (postId, body) => dispatch => {
+  commentPostService(postId, body)
+    .then(data => {
+      dispatch({
+        type: SUBMIT_COMMENT,
+        payload: data
+      });
+      dispatch({
+        type: CLEAR_ERRORS
+      });
     })
     .catch(error => {
       dispatch({

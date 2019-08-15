@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 // Redux and actions
 import { useDispatch, useSelector } from "react-redux";
-import { getPost } from "../../redux/actions/dataActions";
+import { getPost, clearErrors } from "../../redux/actions/dataActions";
 
 // Components
 import ButtonWithTooltip from "../atoms/ButtonWithTooltip";
@@ -72,7 +72,10 @@ const PostDialog = props => {
     dispatch(getPost(postId));
     setOpen(true);
   };
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    dispatch(clearErrors());
+  };
   const renderContent = () => {
     return UI.loading ? (
       <Grid container>

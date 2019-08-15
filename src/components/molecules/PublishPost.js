@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { useDispatch, useSelector } from "react-redux";
-import { addPost } from "../../redux/actions/dataActions";
+import { addPost, clearErrors } from "../../redux/actions/dataActions";
 import { formStyles } from "../../styles/general";
 import { EMPTY_STRING_READONLY } from "../../constants/emptyDefaults";
 
@@ -29,11 +29,15 @@ const PublishPost = props => {
   const { classes } = props;
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    dispatch(clearErrors());
+  };
   const handleChange = event => setBody(event.target.value);
   const handleSubmit = event => {
     event.preventDefault();
     dispatch(addPost({ body: body }));
+    setBody(EMPTY_STRING_READONLY);
   };
 
   return (

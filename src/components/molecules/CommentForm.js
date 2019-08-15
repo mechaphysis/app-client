@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { submitComment } from "../../redux/actions/dataActions";
 
@@ -36,7 +36,7 @@ const CommentForm = props => {
 
   const renderComment = () => {
     return isAuthenticated ? (
-      <Grid item style={{ textAlign: "center" }}>
+      <Grid item sm={12} style={{ textAlign: "center" }}>
         <form onSubmit={handleSubmit}>
           <TextField
             name="body"
@@ -53,7 +53,7 @@ const CommentForm = props => {
             type="submit"
             variant="contained"
             color="primary"
-            className={classes.submitButton}
+            className={classes.button}
           >
             Submit
           </Button>
@@ -61,7 +61,7 @@ const CommentForm = props => {
       </Grid>
     ) : null;
   };
-  return renderComment();
+  return <Fragment>{renderComment()}</Fragment>;
 };
 
 export default withStyles(styles)(CommentForm);

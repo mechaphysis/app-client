@@ -147,3 +147,9 @@ export const submitComment = (postId, body) => dispatch => {
       console.log("Something went wrong: ", error);
     });
 };
+
+export const clearErrors = () => dispatch => {
+  dispatch({
+    type: CLEAR_ERRORS
+  });
+};

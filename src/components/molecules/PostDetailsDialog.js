@@ -8,6 +8,7 @@ import { getPost } from "../../redux/actions/dataActions";
 // Components
 import ButtonWithTooltip from "../atoms/ButtonWithTooltip";
 import Comments from "./Comments";
+import CommentForm from "./CommentForm";
 
 // Material UI
 import Avatar from "@material-ui/core/Avatar";
@@ -111,6 +112,7 @@ const PostDialog = props => {
           <span>{commentCount} Comments</span>
         </Grid>
         <hr className={classes.visibleHR} />
+        <CommentForm postId={postId} />
         <Comments comments={post.comments} />
       </Grid>
     );

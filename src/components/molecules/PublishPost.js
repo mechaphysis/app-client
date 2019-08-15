@@ -45,7 +45,7 @@ const PublishPost = props => {
   return (
     <Fragment>
       <ButtonWithTooltip tipTitle="Publish a Post" handleClick={handleOpen}>
-        <AddIcon color="" />
+        <AddIcon color="inherit" />
       </ButtonWithTooltip>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
         <ButtonWithTooltip

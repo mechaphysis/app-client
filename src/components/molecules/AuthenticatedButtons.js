@@ -14,7 +14,11 @@ const AuthenticatedButtons = () => {
           <HomeIcon color="action" />
         </ButtonWithTooltip>
       </Link>
-      <Notifications color="inherit" />
+      <Link>
+        <ButtonWithTooltip tipTitle="Notifications">
+          <Notifications color="action" />
+        </ButtonWithTooltip>
+      </Link>
     </Fragment>
   );
 };

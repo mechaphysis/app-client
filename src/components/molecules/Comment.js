@@ -18,7 +18,7 @@ const styles = {
 const Comment = props => {
   const { createdAt, userImage, userHandle, body, classes } = props;
   return (
-    <Fragment key={createdAt}>
+    <Fragment>
       <Grid item sm={12}>
         <Grid container>
           <Grid item sm={2}>
@@ -31,7 +31,7 @@ const Comment = props => {
           <Grid item>
             <div className={classes.commentData}>
               <Typography
-                variant="p"
+                variant="h6"
                 component={Link}
                 to={`/users/${userHandle}`}
                 color="primary"
@@ -41,13 +41,13 @@ const Comment = props => {
               <Typography variant="body2" color="secondary">
                 {dayjs(createdAt).format("h:mm a, MMMM DD YYYY")}
               </Typography>
-              <hr className={classes.invisibleSeparator} />
+              <hr className={classes.hiddenHR} />
               <Typography variant="body1">{body}</Typography>
             </div>
           </Grid>
         </Grid>
       </Grid>
-      <hr className={classes.visibleSeparator} />
+      <hr className={classes.visibleHR} />
     </Fragment>
   );
 };

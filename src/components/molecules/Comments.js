@@ -13,6 +13,7 @@ const Comments = props => {
     return (
       <Comment
         body={body}
+        key={createdAt}
         createdAt={createdAt}
         userImage={userImage}
         userHandle={userHandle}

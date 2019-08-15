@@ -74,13 +74,13 @@ const PostDialog = props => {
   const handleClose = () => setOpen(false);
   const renderContent = () => {
     return UI.loading ? (
-      <Grid container spacing={10}>
-        <Grid item sm={10} className={classes.circularProgressContainer}>
+      <Grid container>
+        <Grid item sm={5} className={classes.circularProgressContainer}>
           <CircularProgress size={200} thickness={2} />
         </Grid>
       </Grid>
     ) : (
-      <Grid container spacing={10}>
+      <Grid container>
         <Grid item sm={5}>
           <Avatar
             alt={`Profile`}
@@ -109,9 +109,9 @@ const PostDialog = props => {
             <ChatIcon color="primary" />
           </ButtonWithTooltip>
           <span>{commentCount} Comments</span>
-          <hr className={classes.visibleHR} />
-          <Comments comments={post.comments} />
         </Grid>
+        <hr className={classes.visibleHR} />
+        <Comments comments={post.comments} />
       </Grid>
     );
   };

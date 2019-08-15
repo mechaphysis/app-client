@@ -1,14 +1,9 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../../redux/actions/dataActions";
 import { formStyles } from "../../styles/general";
-import {
-  EMPTY_STRING_READONLY,
-  EMPTY_OBJECT_READONLY
-} from "../../constants/emptyDefaults";
-
-import EditIcon from "@material-ui/icons/Edit";
+import { EMPTY_STRING_READONLY } from "../../constants/emptyDefaults";
 
 import {
   Dialog,
@@ -28,10 +23,9 @@ const styles = formStyles;
 const PublishPost = props => {
   const [open, setOpen] = useState(false);
   const [body, setBody] = useState(EMPTY_STRING_READONLY);
-  const [errors, setErrors] = useState(EMPTY_OBJECT_READONLY); // FIXME: errors not showing
   const dispatch = useDispatch();
   const UI = useSelector(store => store.UI);
-  const { loading } = UI;
+  const { loading, errors } = UI;
   const { classes } = props;
 
   const handleOpen = () => setOpen(true);
@@ -40,8 +34,8 @@ const PublishPost = props => {
   const handleSubmit = event => {
     event.preventDefault();
     dispatch(addPost({ body: body }));
-    handleClose();
   };
+
   return (
     <Fragment>
       <ButtonWithTooltip tipTitle="Publish a Post" handleClick={handleOpen}>

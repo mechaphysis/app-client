@@ -11,3 +11,11 @@ export const uploadImageService = async payload =>
 
 export const editUserDetailsService = async payload =>
   request.post("/user", payload);
+
+/**
+ * For retrieving another user's data and displaying
+ * on their respective user page:
+ * */
+
+export const getUserDataService = async userHandle =>
+  request.get(`/user/${userHandle}`);

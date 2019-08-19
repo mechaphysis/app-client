@@ -22,6 +22,8 @@ import {
   deletePostService,
   addPostService
 } from "../../services/postsService";
+
+import { getUserDataService } from "../../services/userService";
 import {
   EMPTY_ARRAY_READONLY,
   EMPTY_OBJECT_READONLY
@@ -152,4 +154,24 @@ export const clearErrors = () => dispatch => {
   dispatch({
     type: CLEAR_ERRORS
   });
+};
+
+export const getUserData = userHandle => dispatch => {
+  dispatch({
+    type: LOADING_DATA
+  });
+  getUserDataService(userHandle)
+    .then(data => {
+      dispatch({
+        type: SET_POSTS,
+        payload: data.posts
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: SET_POSTS,
+        payload: null
+      });
+      console.log("Somethin went wrong: ", error);
+    });
 };

@@ -7,7 +7,8 @@ import {
   LOADING_DATA,
   DELETE_POST,
   CREATE_POST,
-  SUBMIT_COMMENT
+  SUBMIT_COMMENT,
+  SET_PROFILE
 } from "../actionTypes";
 import {
   EMPTY_ARRAY_READONLY,
@@ -26,6 +27,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loading: true
+      };
+    case SET_PROFILE:
+      return {
+        ...state,
+        profile: action.payload
       };
     case SET_POSTS:
       return {

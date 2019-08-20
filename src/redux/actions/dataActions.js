@@ -10,7 +10,8 @@ import {
   CREATE_POST,
   SET_ERRORS,
   CLEAR_ERRORS,
-  SUBMIT_COMMENT
+  SUBMIT_COMMENT,
+  SET_PROFILE
 } from "../actionTypes";
 
 import {
@@ -165,6 +166,10 @@ export const getUserData = userHandle => dispatch => {
       dispatch({
         type: SET_POSTS,
         payload: data.posts
+      });
+      dispatch({
+        type: SET_PROFILE,
+        payload: data.user
       });
     })
     .catch(error => {

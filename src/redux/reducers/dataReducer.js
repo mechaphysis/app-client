@@ -18,6 +18,7 @@ import {
 const initialState = {
   posts: EMPTY_ARRAY_READONLY,
   post: EMPTY_OBJECT_READONLY,
+  profile: EMPTY_OBJECT_READONLY,
   loading: false
 };
 

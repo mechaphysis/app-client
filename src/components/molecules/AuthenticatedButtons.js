@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 import ButtonWithTooltip from "../atoms/ButtonWithTooltip";
 import PublishPost from "./PublishPost";
 import HomeIcon from "@material-ui/icons/Home";
 import Notifications from "@material-ui/icons/Notifications";
-import { Link } from "@material-ui/core";
 
 const AuthenticatedButtons = () => {
   return (

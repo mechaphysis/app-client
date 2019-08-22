@@ -8,9 +8,9 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 
 //Pages:
-import home from "./components/pages/home/home";
-import login from "./components/pages/login/Login";
-import signup from "./components/pages/signup/SignUp";
+import Home from "./components/pages/home/Home";
+import Login from "./components/pages/login/Login";
+import SignUp from "./components/pages/signup/SignUp";
 import User from "./components/pages/user/User";
 
 //AuthRoute HOC:
@@ -53,9 +53,9 @@ function App() {
           <NavBar />
           <div className="container">
             <Switch>
-              <Route exact path="/" component={home} />
-              <AuthRoute exact path="/login" component={login} />
-              <AuthRoute exact path="/signup" component={signup} />
+              <Route exact path="/" component={Home} />
+              <AuthRoute exact path="/login" component={Login} />
+              <AuthRoute exact path="/signup" component={SignUp} />
               <Route exact path="/users/:handle" component={User} />
             </Switch>
           </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 //Actions
-import { getUserData } from "../../../redux/actions/userActions";
+import { getUserData } from "../../../redux/actions/dataActions";
 //Components
 import Post from "../../organisms/post/Post";
 import StaticProfile from "../../organisms/staticProfile/StaticProfile";
@@ -17,7 +17,6 @@ const User = props => {
 
   useEffect(() => {
     dispatch(getUserData(handle));
-    console.log("--> profile: ", data);
   }, []);
 
   const userPosts = loading ? (

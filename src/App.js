@@ -11,7 +11,7 @@ import store from "./redux/store";
 import home from "./components/pages/home/home";
 import login from "./components/pages/login/Login";
 import signup from "./components/pages/signup/SignUp";
-import user from "./components/pages/user/user";
+import User from "./components/pages/user/User";
 
 //AuthRoute HOC:
 import AuthRoute from "./components/templates/AuthRoute";
@@ -56,7 +56,7 @@ function App() {
               <Route exact path="/" component={home} />
               <AuthRoute exact path="/login" component={login} />
               <AuthRoute exact path="/signup" component={signup} />
-              <Route exact path="/users/:handle" component={user} />
+              <Route exact path="/users/:handle" component={User} />
             </Switch>
           </div>
         </Router>

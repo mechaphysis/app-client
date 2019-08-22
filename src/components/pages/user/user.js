@@ -17,6 +17,7 @@ const User = props => {
 
   useEffect(() => {
     dispatch(getUserData(handle));
+    console.log("--> profile: ", data);
   }, []);
 
   const userPosts = loading ? (
@@ -26,7 +27,6 @@ const User = props => {
   ) : (
     posts.map(post => <Post key={post.postId} post={post} />)
   );
-
   return (
     <Grid container spacing={6}>
       <Grid item sm={8} xs={12}>

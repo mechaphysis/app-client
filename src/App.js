@@ -57,6 +57,11 @@ function App() {
               <AuthRoute exact path="/login" component={Login} />
               <AuthRoute exact path="/signup" component={SignUp} />
               <Route exact path="/users/:handle" component={User} />
+              <Route
+                exact
+                path="/users/:handle/post/:postId"
+                component={User}
+              />
             </Switch>
           </div>
         </Router>

@@ -24,6 +24,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 
 import dayjs from "dayjs";
 import LikeButton from "../atoms/LikeButton";
+import { EMPTY_STRING_READONLY } from "../../constants/emptyDefaults";
 
 const styles = {
   hiddenHR: {
@@ -60,6 +61,8 @@ const styles = {
 
 const PostDialog = props => {
   const [open, setOpen] = useState(false);
+  const [oldPath, setOldPath] = useState(EMPTY_STRING_READONLY);
+  const [newPath, setNewPath] = useState(EMPTY_STRING_READONLY);
 
   const dispatch = useDispatch();
   const user = useSelector(store => store.user);
@@ -69,18 +72,20 @@ const PostDialog = props => {
   const { classes, postId, userHandle, commentCount, likeCount } = props;
 
   const handleOpen = () => {
-    let oldPath = window.location.pathname;
-
     const { userHandle } = props;
 
+    let oldPath = window.location.pathname;
     const newPath = `/users/${userHandle}/post/${postId}`;
 
     window.history.pushState(null, null, newPath);
 
     dispatch(getPost(postId));
     setOpen(true);
+    setOldPath(oldPath);
+    setNewPath(newPath);
   };
   const handleClose = () => {
+    window.history.pushState(null, null, oldPath);
     setOpen(false);
     dispatch(clearErrors());
   };

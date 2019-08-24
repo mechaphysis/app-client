@@ -40,7 +40,8 @@ const Post = props => {
       body,
       createdAt,
       userHandle
-    }
+    },
+    openDialog
   } = props;
 
   return (
@@ -75,6 +76,7 @@ const Post = props => {
           userHandle={userHandle}
           likeCount={likeCount}
           commentCount={commentCount}
+          openDialog={openDialog}
         />
       </CardContent>
     </Card>

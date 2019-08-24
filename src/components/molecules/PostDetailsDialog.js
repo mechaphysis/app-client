@@ -77,6 +77,9 @@ const PostDialog = props => {
     let oldPath = window.location.pathname;
     const newPath = `/users/${userHandle}/post/${postId}`;
 
+    // handle edge case for pasted url of specific post:
+    if (oldPath === newPath) oldPath = `/users/${userHandle}`;
+
     window.history.pushState(null, null, newPath);
 
     dispatch(getPost(postId));

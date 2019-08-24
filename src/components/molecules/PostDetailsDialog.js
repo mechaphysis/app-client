@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 // Redux and actions
@@ -69,6 +69,14 @@ const PostDialog = props => {
   const { classes, postId, userHandle, commentCount, likeCount } = props;
 
   const handleOpen = () => {
+    let oldPath = window.location.pathname;
+
+    const { userHandle } = props;
+
+    const newPath = `/users/${userHandle}/post/${postId}`;
+
+    window.history.pushState(null, null, newPath);
+
     dispatch(getPost(postId));
     setOpen(true);
   };
@@ -76,6 +84,14 @@ const PostDialog = props => {
     setOpen(false);
     dispatch(clearErrors());
   };
+
+  // UseEffect for a ComponentDidMount effect:
+  useEffect(() => {
+    if (props.openDialog) {
+      handleOpen();
+    }
+  }, []);
+
   const renderContent = () => {
     return UI.loading ? (
       <Grid container>

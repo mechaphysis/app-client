@@ -113,7 +113,7 @@ export const editUserDetails = formData => dispatch => {
     .catch(error => console.log("Something went wrong: ", error));
 };
 
-export const MarkNotificationsAsRead = notificationsIds => dispatch => {
+export const markNotificationsAsRead = notificationsIds => dispatch => {
   markNotificationsReadService(notificationsIds)
     .then(data => {
       dispatch({

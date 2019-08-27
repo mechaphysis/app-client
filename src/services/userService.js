@@ -19,3 +19,6 @@ export const editUserDetailsService = async payload =>
 
 export const getUserDataService = async userHandle =>
   request.get(`/user/${userHandle}`);
+
+export const markNotificationsReadService = async payload =>
+  request.post("/notifications", payload);

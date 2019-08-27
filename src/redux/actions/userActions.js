@@ -4,7 +4,8 @@ import {
   SET_ERRORS,
   CLEAR_ERRORS,
   LOADING_UI,
-  LOADING_USER
+  LOADING_USER,
+  MARK_NOTIFICATIONS_READ
 } from "../actionTypes";
 
 //Service:
@@ -13,7 +14,8 @@ import {
   loginService,
   getUserService,
   uploadImageService,
-  editUserDetailsService
+  editUserDetailsService,
+  markNotificationsReadService
 } from "../../services/userService";
 
 //Auth helpers:
@@ -109,4 +111,14 @@ export const editUserDetails = formData => dispatch => {
   editUserDetailsService(formData)
     .then(() => dispatch(getUserData()))
     .catch(error => console.log("Something went wrong: ", error));
+};
+
+export const MarkNotificationsAsRead = notificationsIds => dispatch => {
+  markNotificationsReadService(notificationsIds)
+    .then(data => {
+      dispatch({
+        type: MARK_NOTIFICATIONS_READ
+      });
+    })
+    .catch(error => console.log("Somethin went wrong: ", error));
 };

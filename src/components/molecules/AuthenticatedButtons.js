@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ButtonWithTooltip from "../atoms/ButtonWithTooltip";
 import PublishPost from "./PublishPost";
 import HomeIcon from "@material-ui/icons/Home";
-import Notifications from "@material-ui/icons/Notifications";
+import Notifications from "./Notifications";
 
 const AuthenticatedButtons = () => {
   return (
@@ -14,11 +14,8 @@ const AuthenticatedButtons = () => {
           <HomeIcon color="action" />
         </ButtonWithTooltip>
       </Link>
-      <Link>
-        <ButtonWithTooltip tipTitle="Notifications">
-          <Notifications color="action" />
-        </ButtonWithTooltip>
-      </Link>
+
+      <Notifications />
     </Fragment>
   );
 };

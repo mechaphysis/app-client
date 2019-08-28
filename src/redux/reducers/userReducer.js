@@ -56,12 +56,9 @@ export default function(state = initialState, action) {
         likes: state.likes.filter(like => like.postId !== action.payload.postId)
       };
     case MARK_NOTIFICATIONS_READ:
-      let notificationsRead = state.notifications.map(
-        notification => (notification.read = true)
-      );
+      state.notifications.forEach(notification => (notification.read = true));
       return {
-        ...state,
-        notifications: notificationsRead
+        ...state
       };
     default:
       return state;

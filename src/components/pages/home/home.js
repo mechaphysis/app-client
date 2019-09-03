@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import { getPosts } from "../../../redux/actions/dataActions";
 import Post from "../../organisms/post/Post";
 import Profile from "../../organisms/profile/Profile";
-
+import PostSkeleton from "../../../utils/PostSkeleton";
 import { useSelector, useDispatch } from "react-redux";
 
 const Home = () => {
@@ -17,7 +17,7 @@ const Home = () => {
   }, []);
 
   let recentPosts = loading ? (
-    <p>Loading...</p>
+    <PostSkeleton />
   ) : (
     posts.map(post => <Post key={post.postId} post={post} />)
   );

@@ -10,6 +10,7 @@ import {
   EMPTY_OBJECT_READONLY,
   EMPTY_STRING_READONLY
 } from "../../../constants/emptyDefaults";
+import PostSkeleton from "../../../utils/PostSkeleton";
 
 const User = props => {
   const [postIdParam, setPostId] = useState(EMPTY_STRING_READONLY);
@@ -26,7 +27,7 @@ const User = props => {
   }, []);
 
   const userPosts = loading ? (
-    <p>loading data...</p>
+    <PostSkeleton />
   ) : posts === EMPTY_OBJECT_READONLY ? (
     <p>This user has not post anything yet</p>
   ) : !postIdParam ? (

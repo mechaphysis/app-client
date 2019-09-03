@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { AuthenticatedProfile } from "../../molecules/AuthenticatedProfile";
 import { ProfileNotFound } from "../../molecules/ProfileNotFound";
 import { avatarStyles } from "../../../styles/general";
+import ProfileSkeleton from "../../../utils/ProfileSkeleton";
 
 const styles = {
   ...avatarStyles,
@@ -30,7 +31,7 @@ const Profile = props => {
 
   const { classes } = props;
   let profileContent = user.loading ? (
-    <p>Loading...</p>
+    <ProfileSkeleton />
   ) : user.isAuthenticated ? (
     <AuthenticatedProfile classes={classes} user={user} />
   ) : (

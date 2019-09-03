@@ -26,9 +26,27 @@ const styles = {
   },
   handle: {
     width: 60,
-    height: 20,
+    height: 18,
     backgroundColor: "#009688",
     marginBottom: 7
+  },
+  date: {
+    height: 14,
+    width: 100,
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    marginBottom: 10
+  },
+  fullLine: {
+    height: 15,
+    width: "90%",
+    marginBottom: 10,
+    backgroundColor: "rgba(0, 0, 0, 0.54)"
+  },
+  halfLine: {
+    height: 15,
+    width: "50%",
+    marginBottom: 10,
+    backgroundColor: "rgba(0, 0, 0, 0.54)"
   }
 };
 
